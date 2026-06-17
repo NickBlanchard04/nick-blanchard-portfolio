@@ -1,19 +1,28 @@
 const menuButton = document.querySelector(".menu-toggle");
 const nav = document.querySelector(".site-nav");
 const navLinks = document.querySelectorAll(".site-nav a");
+const navGroups = document.querySelectorAll(".nav-group");
 const faqItems = document.querySelectorAll(".faq-item");
+const menuLabel = menuButton.querySelector(".sr-only");
+
+const setMenuState = (isOpen) => {
+  menuButton.setAttribute("aria-expanded", String(isOpen));
+  menuButton.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+  menuLabel.textContent = isOpen ? "Close menu" : "Open menu";
+  nav.classList.toggle("is-open", isOpen);
+  document.body.classList.toggle("menu-open", isOpen);
+};
 
 const closeMenu = () => {
-  menuButton.setAttribute("aria-expanded", "false");
-  nav.classList.remove("is-open");
-  document.body.classList.remove("menu-open");
+  setMenuState(false);
+  navGroups.forEach((group) => {
+    group.removeAttribute("open");
+  });
 };
 
 menuButton.addEventListener("click", () => {
   const isOpen = menuButton.getAttribute("aria-expanded") === "true";
-  menuButton.setAttribute("aria-expanded", String(!isOpen));
-  nav.classList.toggle("is-open", !isOpen);
-  document.body.classList.toggle("menu-open", !isOpen);
+  setMenuState(!isOpen);
 });
 
 navLinks.forEach((link) => {

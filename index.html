@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20260617-menu-process-pricing">
+  <script src="script.js?v=20260617-menu-process-pricing" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -22,18 +22,40 @@
       <span class="brand-copy">Nick Blanchard</span>
     </a>
 
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-      <span></span>
-      <span></span>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+      <span class="waffle" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
       <span class="sr-only">Open menu</span>
     </button>
 
     <nav class="site-nav" id="site-nav" aria-label="Main navigation">
-      <a href="#services">Services</a>
-      <a href="#work">Work</a>
-      <a href="#process">Process</a>
+      <a href="#top">Home</a>
+      <details class="nav-group">
+        <summary>Services</summary>
+        <div class="nav-submenu">
+          <a href="#services">What I Build</a>
+          <a href="#work">Recent Work</a>
+          <a href="#packages">Price Points</a>
+        </div>
+      </details>
+      <details class="nav-group">
+        <summary>Process</summary>
+        <div class="nav-submenu">
+          <a href="#process">How It Works</a>
+          <a href="#faq">Questions</a>
+        </div>
+      </details>
       <a href="#packages">Packages</a>
-      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
       <a class="portal-link" href="https://www.instagram.com/nickblanchard04/" target="_blank" rel="noreferrer">Instagram</a>
     </nav>
   </header>
@@ -104,6 +126,37 @@
         <span>Sports programs</span>
         <span>Restaurants</span>
         <span>Contractors</span>
+      </div>
+    </section>
+
+    <section class="process-section" id="process">
+      <div class="section-intro section-intro-center">
+        <p class="eyebrow">How it works</p>
+        <h2>Four steps. Your site goes live.</h2>
+        <p>No tech background needed. You bring the business. I shape the website.</p>
+      </div>
+
+      <div class="process-list">
+        <article>
+          <span>1</span>
+          <h3>Tell me what you need</h3>
+          <p>We define the goal, audience, pages, services, and examples you like.</p>
+        </article>
+        <article>
+          <span>2</span>
+          <h3>See the direction</h3>
+          <p>I turn your notes into structure, copy, design direction, and a working first version.</p>
+        </article>
+        <article>
+          <span>3</span>
+          <h3>Review and refine</h3>
+          <p>We tighten the content, visuals, mobile layout, links, and calls to action.</p>
+        </article>
+        <article>
+          <span>4</span>
+          <h3>Launch and improve</h3>
+          <p>Your site goes live, then we keep improving what matters most.</p>
+        </article>
       </div>
     </section>
 
@@ -253,37 +306,6 @@
       </div>
     </section>
 
-    <section class="process-section" id="process">
-      <div class="section-intro section-intro-center">
-        <p class="eyebrow">How it works</p>
-        <h2>Four steps. Your site goes live.</h2>
-        <p>No tech background needed. You bring the business. I shape the website.</p>
-      </div>
-
-      <div class="process-list">
-        <article>
-          <span>1</span>
-          <h3>Tell me what you need</h3>
-          <p>We define the goal, audience, pages, services, and examples you like.</p>
-        </article>
-        <article>
-          <span>2</span>
-          <h3>See the direction</h3>
-          <p>I turn your notes into structure, copy, design direction, and a working first version.</p>
-        </article>
-        <article>
-          <span>3</span>
-          <h3>Review and refine</h3>
-          <p>We tighten the content, visuals, mobile layout, links, and calls to action.</p>
-        </article>
-        <article>
-          <span>4</span>
-          <h3>Launch and improve</h3>
-          <p>Your site goes live, then we keep improving what matters most.</p>
-        </article>
-      </div>
-    </section>
-
     <section class="packages-section" id="packages">
       <div class="section-intro section-intro-center">
         <p class="eyebrow">Ways to work</p>
@@ -292,7 +314,7 @@
       </div>
 
       <div class="package-grid">
-        <article class="package-card">
+        <article class="package-card package-starter">
           <span>Brand-new businesses</span>
           <h3>Starter Launch</h3>
           <p>For new businesses that need a real online presence without spending agency-level money.</p>
@@ -307,7 +329,7 @@
           </ul>
         </article>
 
-        <article class="package-card package-featured">
+        <article class="package-card package-growth package-featured">
           <span>Established businesses</span>
           <h3>Business Growth</h3>
           <p>For businesses ready to invest in a stronger website that explains the offer and converts better.</p>
@@ -323,7 +345,7 @@
           </ul>
         </article>
 
-        <article class="package-card">
+        <article class="package-card package-corporate">
           <span>Corporate caliber</span>
           <h3>Corporate Build</h3>
           <p>For larger brands, organizations, or high-stakes projects that need a more custom digital experience.</p>
