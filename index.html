@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=20260617-menu-process-pricing">
-  <script src="script.js?v=20260617-menu-process-pricing" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20260618-consumer-menu">
+  <script src="script.js?v=20260618-consumer-menu" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -38,20 +38,25 @@
     </button>
 
     <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <div class="nav-menu-label">
+        <span>Menu</span>
+        <strong>Find what you need</strong>
+      </div>
       <a href="#top">Home</a>
       <details class="nav-group">
-        <summary>Services</summary>
+        <summary>Start here</summary>
         <div class="nav-submenu">
-          <a href="#services">What I Build</a>
-          <a href="#work">Recent Work</a>
-          <a href="#packages">Price Points</a>
+          <a href="#process">How it works</a>
+          <a href="#problems">What gets fixed</a>
+          <a href="#faq">Common questions</a>
         </div>
       </details>
       <details class="nav-group">
-        <summary>Process</summary>
+        <summary>See the work</summary>
         <div class="nav-submenu">
-          <a href="#process">How It Works</a>
-          <a href="#faq">Questions</a>
+          <a href="#services">What I build</a>
+          <a href="#work">Recent projects</a>
+          <a href="#compare">Why this works</a>
         </div>
       </details>
       <a href="#packages">Packages</a>
@@ -61,20 +66,25 @@
   </header>
 
   <div class="notice-bar" role="note">
-    <span>New York web design for small businesses, organizations, and creators.</span>
-    <a href="mailto:nickblanchardbusiness@gmail.com">Start a website request</a>
+    <span>Need a website people understand fast? I can help.</span>
+    <a href="mailto:nickblanchardbusiness@gmail.com">Email Nick</a>
   </div>
 
   <main id="main">
     <section class="hero" id="top">
       <div class="hero-copy">
-        <p class="eyebrow">Made for businesses that need a better online first impression</p>
-        <h1>Your website.<br><em>Handled.</em></h1>
-        <p class="hero-text">I design, build, and improve websites that help people understand what you do, trust your business, and take the next step.</p>
+        <p class="eyebrow">Websites for businesses that need more calls, quotes, and trust</p>
+        <h1>Make your business easy to <em>choose.</em></h1>
+        <p class="hero-text">I build clear, mobile-friendly websites that explain your services, show proof, and help visitors contact you without getting lost.</p>
         <div class="hero-actions">
-          <a class="button button-primary" href="mailto:nickblanchardbusiness@gmail.com">Get my website started</a>
-          <a class="button button-secondary" href="#work">See my work</a>
+          <a class="button button-primary" href="mailto:nickblanchardbusiness@gmail.com">Get a website quote</a>
+          <a class="button button-secondary" href="#packages">See pricing options</a>
         </div>
+        <ul class="hero-proof" aria-label="Website benefits">
+          <li>Clear services</li>
+          <li>Mobile-first</li>
+          <li>Easy contact path</li>
+        </ul>
       </div>
 
       <div class="hero-showcase" aria-label="Website examples">
@@ -106,7 +116,7 @@
           <article class="proof-card">
             <span>Built for</span>
             <strong>local businesses, leagues, brands, and creators</strong>
-            <p>Practical websites that make the next action obvious.</p>
+            <p>Practical websites that help customers know who to call and why.</p>
           </article>
         </div>
       </div>
@@ -160,7 +170,7 @@
       </div>
     </section>
 
-    <section class="problem-section">
+    <section class="problem-section" id="problems">
       <div class="section-intro">
         <p class="eyebrow">Sound familiar?</p>
         <h2>Most websites lose customers before they ever call.</h2>
@@ -266,7 +276,7 @@
       </div>
     </section>
 
-    <section class="compare-section">
+    <section class="compare-section" id="compare">
       <div class="section-intro section-intro-center">
         <p class="eyebrow">Why this works</p>
         <h2>One focused build instead of a messy pile of tools.</h2>
