@@ -76,9 +76,9 @@ h3 {
 }
 
 h1 {
-  max-width: 13ch;
+  max-width: 15ch;
   margin: 0 auto 1.25rem;
-  font-size: clamp(3.2rem, 13vw, 6.8rem);
+  font-size: clamp(2.85rem, 10.5vw, 6.2rem);
   font-weight: 900;
 }
 
@@ -424,6 +424,39 @@ p {
   margin: 2rem auto 0;
 }
 
+.proof-strip {
+  position: relative;
+  z-index: 2;
+  padding: 1rem 1rem 1.25rem;
+  background: #07080f;
+}
+
+.proof-row {
+  display: grid;
+  width: min(100%, var(--container));
+  margin: 0 auto;
+  gap: 0.7rem;
+  grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr));
+  padding: 1rem;
+  border: 1px solid var(--panel-line);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.proof-row span {
+  display: flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.065);
+  border-radius: 0.75rem;
+  color: var(--muted-strong);
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-align: center;
+}
+
 .button {
   display: inline-flex;
   min-height: 3.35rem;
@@ -468,6 +501,7 @@ p {
 .section-heading,
 .project-grid,
 .difference-grid,
+.fit-list,
 .process-grid,
 .contact-grid,
 .site-footer {
@@ -498,6 +532,7 @@ p {
 .about-section,
 .work-section,
 .services-section,
+.fit-section,
 .packages-section,
 .faq-section {
   background:
@@ -508,6 +543,23 @@ p {
 .stat-stack {
   display: grid;
   gap: 1rem;
+}
+
+.trust-list {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.6rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trust-list li {
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(102, 183, 255, 0.16);
+  border-radius: 0.8rem;
+  background: rgba(102, 183, 255, 0.055);
+  color: var(--muted-strong);
+  font-weight: 750;
 }
 
 .stat-stack article,
@@ -581,23 +633,43 @@ p {
   margin-top: 0.8rem;
 }
 
-.project-copy ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem;
-  margin: 1.1rem 0 0;
-  padding: 0;
-  list-style: none;
+.case-study-list {
+  display: grid;
+  gap: 0.85rem;
+  margin: 1.2rem 0 1.3rem;
 }
 
-.project-copy li {
-  padding: 0.35rem 0.62rem;
-  border: 1px solid rgba(61, 134, 255, 0.24);
-  border-radius: 999px;
-  background: rgba(61, 134, 255, 0.08);
+.case-study-list p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.case-study-list strong {
+  display: block;
+  margin-bottom: 0.12rem;
   color: var(--blue-strong);
+  font-family: var(--mono);
   font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.project-link {
+  display: inline-flex;
+  min-height: 2.9rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  border: 1px solid rgba(102, 183, 255, 0.28);
+  border-radius: 0.7rem;
+  color: white;
   font-weight: 700;
+  transition: border-color 180ms ease, background-color 180ms ease;
+}
+
+.project-link:hover {
+  border-color: rgba(102, 183, 255, 0.55);
+  background: rgba(61, 134, 255, 0.1);
 }
 
 .difference-grid,
@@ -605,6 +677,34 @@ p {
 .package-grid {
   display: grid;
   gap: 1rem;
+}
+
+.fit-section .section-grid {
+  align-items: start;
+}
+
+.fit-section h2 {
+  max-width: 15ch;
+}
+
+.fit-list {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+}
+
+.fit-list li {
+  display: flex;
+  min-height: 3.25rem;
+  align-items: center;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--panel-line);
+  border-left-color: rgba(102, 183, 255, 0.52);
+  border-radius: 0.85rem;
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--muted-strong);
+  font-weight: 800;
 }
 
 .difference-grid article,
@@ -722,9 +822,9 @@ p {
 .package-card {
   position: relative;
   display: grid;
-  gap: 0.15rem;
+  gap: 0.7rem;
   overflow: hidden;
-  min-height: 21rem;
+  min-height: 34.5rem;
   align-content: start;
 }
 
@@ -755,11 +855,38 @@ p {
 
 .package-card strong {
   display: block;
-  margin: 1.25rem 0;
+  margin: 0.45rem 0 0.15rem;
   color: white;
   font-size: clamp(2rem, 10vw, 2.85rem);
   letter-spacing: -0.07em;
   line-height: 1;
+}
+
+.package-features {
+  display: grid;
+  gap: 0.58rem;
+  margin: 0.25rem 0 1.1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.package-features li {
+  position: relative;
+  padding-left: 1rem;
+  color: var(--muted-strong);
+  font-size: 0.95rem;
+  font-weight: 650;
+}
+
+.package-features li::before {
+  position: absolute;
+  top: 0.68em;
+  left: 0;
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 999px;
+  background: var(--blue-strong);
+  content: "";
 }
 
 .package-card a {
@@ -1062,7 +1189,7 @@ p {
   }
 
   .package-card {
-    min-height: 25rem;
+    min-height: 32.5rem;
     padding: 1.6rem;
   }
 
