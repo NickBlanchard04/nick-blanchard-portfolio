@@ -4,7 +4,14 @@ const navLinks = document.querySelectorAll(".site-nav a");
 const navGroups = document.querySelectorAll(".nav-group");
 const faqItems = document.querySelectorAll(".faq-item");
 const copyEmailButtons = document.querySelectorAll("[data-copy-email]");
+const heroOrbits = document.querySelector(".hero-orbits");
 const menuLabel = menuButton?.querySelector(".sr-only");
+
+window.addEventListener("load", () => {
+  window.requestAnimationFrame(() => {
+    heroOrbits?.classList.add("is-visible");
+  });
+});
 
 const setMenuState = (isOpen) => {
   if (!menuButton || !nav || !menuLabel) {

@@ -280,7 +280,13 @@ p {
   position: absolute;
   inset: 0;
   z-index: -1;
+  opacity: 0;
   pointer-events: none;
+  transition: opacity 420ms ease;
+}
+
+.hero-orbits.is-visible {
+  opacity: 1;
 }
 
 .hero-orbits span {
@@ -297,8 +303,9 @@ p {
   contain: layout paint;
   transform: translate3d(-50%, -50%, 0) rotate(var(--orbit-tilt, 0deg));
   transform-origin: center;
-  will-change: transform;
-  animation: orbit-spin 26s linear infinite;
+  opacity: 0.68;
+  will-change: opacity;
+  animation: orbit-breathe 8s ease-in-out infinite alternate;
 }
 
 .hero-orbits span:nth-child(2) {
@@ -306,8 +313,7 @@ p {
   width: min(70vw, 34rem);
   height: min(70vw, 34rem);
   border-color: rgba(255, 47, 135, 0.16);
-  animation-duration: 32s;
-  animation-direction: reverse;
+  animation-duration: 10s;
 }
 
 .hero-orbits span:nth-child(3) {
@@ -315,7 +321,7 @@ p {
   width: min(58vw, 27rem);
   height: min(58vw, 27rem);
   border-style: dashed;
-  animation-duration: 19s;
+  animation-duration: 6s;
 }
 
 .signal-points {
@@ -364,7 +370,6 @@ p {
   position: relative;
   z-index: 1;
   width: min(100%, 56rem);
-  animation: hero-float 7s ease-in-out infinite;
 }
 
 .location-tag,
@@ -1124,22 +1129,12 @@ p {
   }
 }
 
-@keyframes orbit-spin {
+@keyframes orbit-breathe {
   0% {
-    transform: translate3d(-50%, -50%, 0) rotate(var(--orbit-tilt, 0deg));
+    opacity: 0.42;
   }
   100% {
-    transform: translate3d(-50%, -50%, 0) rotate(calc(var(--orbit-tilt, 0deg) + 360deg));
-  }
-}
-
-@keyframes hero-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-0.45rem);
+    opacity: 0.82;
   }
 }
 
