@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nickblanchard04.github.io/nick-blanchard-portfolio/sitemap.xml

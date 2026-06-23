@@ -280,27 +280,31 @@ p {
   position: absolute;
   inset: 0;
   z-index: -1;
-  display: grid;
-  place-items: center;
   pointer-events: none;
 }
 
 .hero-orbits span {
   position: absolute;
+  top: 50%;
+  left: 50%;
   width: min(82vw, 43rem);
-  aspect-ratio: 1;
+  height: min(82vw, 43rem);
   border: 1px solid rgba(102, 183, 255, 0.15);
   border-radius: 999px;
   box-shadow:
     inset 0 0 40px rgba(61, 134, 255, 0.05),
     0 0 30px rgba(107, 92, 255, 0.08);
-  transform: rotate(var(--orbit-tilt, 0deg));
+  contain: layout paint;
+  transform: translate3d(-50%, -50%, 0) rotate(var(--orbit-tilt, 0deg));
+  transform-origin: center;
+  will-change: transform;
   animation: orbit-spin 26s linear infinite;
 }
 
 .hero-orbits span:nth-child(2) {
   --orbit-tilt: 62deg;
   width: min(70vw, 34rem);
+  height: min(70vw, 34rem);
   border-color: rgba(255, 47, 135, 0.16);
   animation-duration: 32s;
   animation-direction: reverse;
@@ -309,6 +313,7 @@ p {
 .hero-orbits span:nth-child(3) {
   --orbit-tilt: -38deg;
   width: min(58vw, 27rem);
+  height: min(58vw, 27rem);
   border-style: dashed;
   animation-duration: 19s;
 }
@@ -455,6 +460,37 @@ p {
   font-size: 0.88rem;
   font-weight: 800;
   text-align: center;
+}
+
+.process-preview {
+  display: grid;
+  width: min(100%, var(--container));
+  margin: 0.85rem auto 0;
+  gap: 0.7rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.process-preview article {
+  display: grid;
+  min-height: 3.1rem;
+  align-items: center;
+  grid-template-columns: auto 1fr;
+  gap: 0.7rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid rgba(102, 183, 255, 0.16);
+  border-radius: 0.8rem;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.process-preview strong {
+  color: var(--blue-strong);
+  font-family: var(--mono);
+  font-size: 0.82rem;
+}
+
+.process-preview span {
+  color: white;
+  font-weight: 800;
 }
 
 .button {
@@ -905,7 +941,7 @@ p {
 
 .package-card.package-featured a {
   border-color: transparent;
-  background: var(--blue);
+  background: #2166d8;
 }
 
 .faq-list {
@@ -977,8 +1013,9 @@ p {
   margin-top: 1.6rem;
 }
 
-.contact-list a,
-.contact-list span {
+.contact-list > a,
+.contact-list > span,
+.copy-email-button {
   display: flex;
   min-height: 3rem;
   align-items: center;
@@ -988,6 +1025,27 @@ p {
   background: rgba(255, 255, 255, 0.035);
   color: var(--muted-strong);
   font-weight: 700;
+}
+
+.copy-email-button {
+  width: 100%;
+  justify-content: space-between;
+  gap: 1rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+.copy-email-button:hover,
+.copy-email-button.is-copied {
+  border-color: rgba(102, 183, 255, 0.38);
+  color: white;
+}
+
+.copy-status {
+  color: var(--blue-strong);
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-align: right;
 }
 
 .contact-card {
@@ -1068,10 +1126,10 @@ p {
 
 @keyframes orbit-spin {
   0% {
-    transform: rotate(var(--orbit-tilt, 0deg)) translate3d(0, 0, 0);
+    transform: translate3d(-50%, -50%, 0) rotate(var(--orbit-tilt, 0deg));
   }
   100% {
-    transform: rotate(calc(var(--orbit-tilt, 0deg) + 360deg)) translate3d(0, 0, 0);
+    transform: translate3d(-50%, -50%, 0) rotate(calc(var(--orbit-tilt, 0deg) + 360deg));
   }
 }
 
@@ -1097,6 +1155,10 @@ p {
 @media (min-width: 40rem) {
   .hero-actions {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .process-preview {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .project-grid,
