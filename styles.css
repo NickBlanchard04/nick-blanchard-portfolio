@@ -431,13 +431,13 @@ button {
 }
 
 .button-primary {
-  background: var(--blue);
+  background: var(--blue-dark);
   color: #fff;
   box-shadow: 0 1.2rem 3rem rgba(47, 111, 255, 0.18);
 }
 
 .button-primary:hover {
-  background: #3d79ff;
+  background: #526a72;
 }
 
 .button-secondary {
@@ -1846,9 +1846,13 @@ button {
 }
 
 .contact-method-primary {
-  border-color: var(--blue);
-  background: var(--blue);
+  border-color: var(--blue-dark);
+  background: var(--blue-dark);
   color: #fff;
+}
+
+.contact-method.contact-method-primary small {
+  opacity: 1;
 }
 
 .contact-method span {
