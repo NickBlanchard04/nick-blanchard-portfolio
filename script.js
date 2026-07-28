@@ -10,6 +10,9 @@ const workIndex = document.querySelector("[data-work-index]");
 const workControls = [...document.querySelectorAll("[data-work-control]")];
 const hero = document.querySelector(".hero");
 const storyLine = document.querySelector(".story-line");
+const sectionNavLinks = [
+  ...document.querySelectorAll('.desktop-nav a[href^="#"], .mobile-menu a[href^="#"]')
+];
 
 let activeWorkIndex = 0;
 
@@ -23,6 +26,7 @@ const setMenuState = (isOpen) => {
   menuLabel.textContent = isOpen ? "Close menu" : "Open menu";
   mobileMenu.classList.toggle("is-open", isOpen);
   mobileMenu.setAttribute("aria-hidden", String(!isOpen));
+  mobileMenu.toggleAttribute("inert", !isOpen);
   document.body.classList.toggle("menu-open", isOpen);
 
   if (isOpen) {
@@ -53,6 +57,50 @@ window.addEventListener("resize", () => {
     setMenuState(false);
   }
 });
+
+const navSections = [...new Set(
+  sectionNavLinks
+    .map((link) => document.querySelector(link.getAttribute("href")))
+    .filter(Boolean)
+)];
+
+const setActiveNavSection = (sectionId) => {
+  sectionNavLinks.forEach((link) => {
+    const isCurrent = link.getAttribute("href") === `#${sectionId}`;
+    const currentValue = link.getAttribute("aria-current");
+
+    if (isCurrent) {
+      link.setAttribute("aria-current", "location");
+    } else if (currentValue === "location") {
+      link.removeAttribute("aria-current");
+    }
+  });
+};
+
+if (navSections.length) {
+  let navUpdateFrame = 0;
+
+  const updateActiveNav = () => {
+    const readingLine = window.innerHeight * 0.32;
+    const activeSection = navSections.find((section) => {
+      const bounds = section.getBoundingClientRect();
+      return bounds.top <= readingLine && bounds.bottom > readingLine;
+    });
+
+    setActiveNavSection(activeSection?.id || "");
+    navUpdateFrame = 0;
+  };
+
+  const scheduleNavUpdate = () => {
+    if (!navUpdateFrame) {
+      navUpdateFrame = window.requestAnimationFrame(updateActiveNav);
+    }
+  };
+
+  window.addEventListener("scroll", scheduleNavUpdate, { passive: true });
+  window.addEventListener("resize", scheduleNavUpdate);
+  scheduleNavUpdate();
+}
 
 const setActiveWork = (index) => {
   if (!workCards.length) {
@@ -207,9 +255,6 @@ const initializeMotion = () => {
 
   if (document.querySelector(".hero-frame-green")) {
     heroTimeline.from(".hero-frame-green", {
-      x: 70,
-      y: -15,
-      rotation: 4,
       opacity: 0,
       duration: 1.1
     }, "-=0.95");
@@ -217,9 +262,6 @@ const initializeMotion = () => {
 
   if (document.querySelector(".hero-frame-ubl")) {
     heroTimeline.from(".hero-frame-ubl", {
-      x: 85,
-      y: 25,
-      rotation: -4,
       opacity: 0,
       duration: 1.1
     }, "-=0.82");
