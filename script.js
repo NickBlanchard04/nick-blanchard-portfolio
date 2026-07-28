@@ -10,11 +10,41 @@ const workIndex = document.querySelector("[data-work-index]");
 const workControls = [...document.querySelectorAll("[data-work-control]")];
 const hero = document.querySelector(".hero");
 const storyLine = document.querySelector(".story-line");
+const viewedWorkProjects = new Set();
+const contactHashes = new Set(["#contact", "#resource-contact", "#inquiry"]);
 const sectionNavLinks = [
   ...document.querySelectorAll('.desktop-nav a[href^="#"], .mobile-menu a[href^="#"]')
 ];
 
 let activeWorkIndex = 0;
+
+const trackAnalytics = (eventName, parameters) => {
+  window.bbbAnalytics?.track(eventName, parameters);
+};
+
+const getLinkPlacement = (link) => {
+  if (link.closest(".desktop-nav")) {
+    return "desktop-navigation";
+  }
+
+  if (link.closest(".mobile-menu")) {
+    return "mobile-navigation";
+  }
+
+  if (link.closest(".hero-actions")) {
+    return "hero";
+  }
+
+  if (link.closest(".site-footer")) {
+    return "footer";
+  }
+
+  if (link.closest(".contact")) {
+    return "contact-section";
+  }
+
+  return "page-content";
+};
 
 const setMenuState = (isOpen) => {
   if (!menuButton || !menuLabel || !mobileMenu) {
@@ -116,6 +146,18 @@ const setActiveWork = (index) => {
   if (workIndex) {
     workIndex.textContent = String(activeWorkIndex + 1).padStart(2, "0");
   }
+
+  const activeCard = workCards[activeWorkIndex];
+  const projectId = activeCard?.dataset.analyticsProject;
+
+  if (projectId && !viewedWorkProjects.has(projectId)) {
+    viewedWorkProjects.add(projectId);
+    trackAnalytics("portfolio_project_view", {
+      project_id: projectId,
+      project_name: activeCard.dataset.analyticsProjectName || projectId,
+      placement: "portfolio"
+    });
+  }
 };
 
 workCards.forEach((card, index) => {
@@ -167,9 +209,66 @@ copyButton?.addEventListener("click", async () => {
 
   status.textContent = copied ? "Email copied" : "Select email";
 
+  if (copied) {
+    trackAnalytics("contact_intent", {
+      contact_method: "email",
+      placement: "copy-email"
+    });
+  }
+
   window.setTimeout(() => {
     status.textContent = "Copy email";
   }, 2400);
+});
+
+document.addEventListener("click", (event) => {
+  const link = event.target.closest("a");
+
+  if (!link) {
+    return;
+  }
+
+  if (link.dataset.analyticsProject) {
+    trackAnalytics("portfolio_project_click", {
+      project_id: link.dataset.analyticsProject,
+      project_name: link.dataset.analyticsProjectName || link.dataset.analyticsProject,
+      placement: link.dataset.analyticsPlacement || "portfolio"
+    });
+    return;
+  }
+
+  if (link.dataset.analyticsPlan) {
+    trackAnalytics("pricing_cta_click", {
+      plan_name: link.dataset.analyticsPlan,
+      placement: "pricing"
+    });
+    return;
+  }
+
+  const href = link.getAttribute("href") || "";
+  let contactMethod = "";
+
+  const destination = href ? new URL(href, window.location.href) : null;
+
+  if (
+    destination?.origin === window.location.origin &&
+    contactHashes.has(destination.hash)
+  ) {
+    contactMethod = "contact";
+  } else if (href.startsWith("mailto:")) {
+    contactMethod = "email";
+  } else if (href.startsWith("tel:")) {
+    contactMethod = "phone";
+  } else if (href.startsWith("sms:")) {
+    contactMethod = "text";
+  }
+
+  if (contactMethod) {
+    trackAnalytics("contact_intent", {
+      contact_method: contactMethod,
+      placement: getLinkPlacement(link)
+    });
+  }
 });
 
 hero?.addEventListener("pointermove", (event) => {

@@ -36,6 +36,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+  <script src="analytics.js?v=20260728-analytics-1" defer></script>
   <script src="script.js?v=20260728-editorial-1" defer></script>
 
   <script type="application/ld+json">
@@ -197,12 +198,12 @@
       </div>
 
       <div class="hero-projects" data-hero-projects>
-        <a class="hero-frame hero-frame-green" href="https://nickblanchard04.github.io/CosmicGames/GW/" target="_blank" rel="noreferrer" aria-label="Open the Green Wave Landscaping website">
+        <a class="hero-frame hero-frame-green" href="https://nickblanchard04.github.io/CosmicGames/GW/" target="_blank" rel="noreferrer" aria-label="Open the Green Wave Landscaping website" data-analytics-project="green-wave-landscaping" data-analytics-project-name="Green Wave Landscaping" data-analytics-placement="hero">
           <span>Green Wave Landscaping <small>Local service website</small></span>
           <img src="assets/green-wave-landscaping-desktop.png" width="1265" height="720" alt="Green Wave Landscaping homepage" fetchpriority="high">
         </a>
 
-        <a class="hero-frame hero-frame-ubl" href="https://upstatebasketballleague.com/" target="_blank" rel="noreferrer" aria-label="Open the Upstate Basketball League website">
+        <a class="hero-frame hero-frame-ubl" href="https://upstatebasketballleague.com/" target="_blank" rel="noreferrer" aria-label="Open the Upstate Basketball League website" data-analytics-project="upstate-basketball-league" data-analytics-project-name="Upstate Basketball League" data-analytics-placement="hero">
           <span>Upstate Basketball League <small>Organization website</small></span>
           <img src="assets/upstate-basketball-league-desktop.png" width="1265" height="720" alt="Upstate Basketball League homepage" fetchpriority="high">
         </a>
@@ -229,7 +230,7 @@
       </div>
 
       <div class="work-accordion">
-        <article class="work-card work-card-green is-active" data-work-card>
+        <article class="work-card work-card-green is-active" data-work-card data-analytics-project="green-wave-landscaping" data-analytics-project-name="Green Wave Landscaping">
           <div class="work-card-copy">
             <div class="work-card-top">
               <span>Local service business</span>
@@ -238,10 +239,10 @@
             <div>
               <h3>A direct route from first look to getting in touch.</h3>
               <p>I created a focused landing page for a landscaper, using clear service language and prominent contact actions so visitors do not have to hunt for the next step.</p>
-              <a href="https://nickblanchard04.github.io/CosmicGames/GW/" target="_blank" rel="noreferrer">View live website <span aria-hidden="true">&nearr;</span></a>
+              <a href="https://nickblanchard04.github.io/CosmicGames/GW/" target="_blank" rel="noreferrer" data-analytics-project="green-wave-landscaping" data-analytics-project-name="Green Wave Landscaping" data-analytics-placement="portfolio-copy">View live website <span aria-hidden="true">&nearr;</span></a>
             </div>
           </div>
-          <a class="work-card-image image-scale" href="https://nickblanchard04.github.io/CosmicGames/GW/" target="_blank" rel="noreferrer" tabindex="-1" aria-hidden="true">
+          <a class="work-card-image image-scale" href="https://nickblanchard04.github.io/CosmicGames/GW/" target="_blank" rel="noreferrer" tabindex="-1" aria-hidden="true" data-analytics-project="green-wave-landscaping" data-analytics-project-name="Green Wave Landscaping" data-analytics-placement="portfolio-image">
             <picture>
               <source media="(max-width: 47.99rem)" srcset="assets/green-wave-landscaping-mobile.png">
               <img src="assets/green-wave-landscaping-desktop.png" width="1265" height="720" loading="lazy" alt="">
@@ -249,7 +250,7 @@
           </a>
         </article>
 
-        <article class="work-card work-card-ubl" data-work-card>
+        <article class="work-card work-card-ubl" data-work-card data-analytics-project="upstate-basketball-league" data-analytics-project-name="Upstate Basketball League">
           <div class="work-card-copy">
             <div class="work-card-top">
               <span>Sports organization</span>
@@ -258,10 +259,10 @@
             <div>
               <h3>One digital home for a growing basketball league.</h3>
               <p>I designed a structured digital home that brings schedules, standings, teams, league information, and its visual identity into one consistent, indexable experience. Its branded searches now have a clear destination.</p>
-              <a href="https://upstatebasketballleague.com/" target="_blank" rel="noreferrer">View live website <span aria-hidden="true">&nearr;</span></a>
+              <a href="https://upstatebasketballleague.com/" target="_blank" rel="noreferrer" data-analytics-project="upstate-basketball-league" data-analytics-project-name="Upstate Basketball League" data-analytics-placement="portfolio-copy">View live website <span aria-hidden="true">&nearr;</span></a>
             </div>
           </div>
-          <a class="work-card-image image-scale" href="https://upstatebasketballleague.com/" target="_blank" rel="noreferrer" tabindex="-1" aria-hidden="true">
+          <a class="work-card-image image-scale" href="https://upstatebasketballleague.com/" target="_blank" rel="noreferrer" tabindex="-1" aria-hidden="true" data-analytics-project="upstate-basketball-league" data-analytics-project-name="Upstate Basketball League" data-analytics-placement="portfolio-image">
             <picture>
               <source media="(max-width: 47.99rem)" srcset="assets/upstate-basketball-league-mobile.png">
               <img src="assets/upstate-basketball-league-desktop.png" width="1265" height="720" loading="lazy" alt="">
@@ -345,7 +346,7 @@
             </div>
             <h4>Up to 4 pages</h4>
             <p>A focused site for a business that needs a clear, credible home online.</p>
-            <a href="#inquiry">Ask about Essentials <span aria-hidden="true">&rarr;</span></a>
+            <a href="#inquiry" data-analytics-plan="Essentials">Ask about Essentials <span aria-hidden="true">&rarr;</span></a>
           </article>
 
           <article class="pricing-card pricing-card-featured">
@@ -355,7 +356,7 @@
             </div>
             <h4>Up to 7 pages</h4>
             <p>More room for services, trust-building content, and a stronger customer path.</p>
-            <a href="#inquiry">Ask about Growth <span aria-hidden="true">&rarr;</span></a>
+            <a href="#inquiry" data-analytics-plan="Growth">Ask about Growth <span aria-hidden="true">&rarr;</span></a>
           </article>
 
           <article class="pricing-card">
@@ -365,7 +366,7 @@
             </div>
             <h4>Up to 10 pages</h4>
             <p>Includes one simple booking-request workflow for a more involved service website.</p>
-            <a href="#inquiry">Talk through Custom <span aria-hidden="true">&rarr;</span></a>
+            <a href="#inquiry" data-analytics-plan="Custom">Talk through Custom <span aria-hidden="true">&rarr;</span></a>
           </article>
         </div>
       </section>
