@@ -1,24 +1,33 @@
-document.body.classList.add("motion-ready");
-
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const menuButton = document.querySelector(".menu-toggle");
 const menuLabel = menuButton?.querySelector(".sr-only");
-const nav = document.querySelector(".site-nav");
-const navLinks = document.querySelectorAll(".site-nav a");
-const faqItems = document.querySelectorAll(".faq-item");
-const copyEmailButtons = document.querySelectorAll("[data-copy-email]");
+const mobileMenu = document.querySelector(".mobile-menu");
+const mobileMenuLinks = [...document.querySelectorAll(".mobile-menu a")];
 const currentYear = document.querySelector("[data-current-year]");
+const copyButton = document.querySelector("[data-copy-email]");
+const workCards = [...document.querySelectorAll("[data-work-card]")];
+const workIndex = document.querySelector("[data-work-index]");
+const workControls = [...document.querySelectorAll("[data-work-control]")];
+const hero = document.querySelector(".hero");
+const storyLine = document.querySelector(".story-line");
+
+let activeWorkIndex = 0;
 
 const setMenuState = (isOpen) => {
-  if (!menuButton || !menuLabel || !nav) {
+  if (!menuButton || !menuLabel || !mobileMenu) {
     return;
   }
 
   menuButton.setAttribute("aria-expanded", String(isOpen));
   menuButton.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
   menuLabel.textContent = isOpen ? "Close menu" : "Open menu";
-  nav.classList.toggle("is-open", isOpen);
+  mobileMenu.classList.toggle("is-open", isOpen);
+  mobileMenu.setAttribute("aria-hidden", String(!isOpen));
   document.body.classList.toggle("menu-open", isOpen);
+
+  if (isOpen) {
+    window.setTimeout(() => mobileMenuLinks[0]?.focus(), 430);
+  }
 };
 
 menuButton?.addEventListener("click", () => {
@@ -26,14 +35,17 @@ menuButton?.addEventListener("click", () => {
   setMenuState(!isOpen);
 });
 
-navLinks.forEach((link) => {
+mobileMenuLinks.forEach((link) => {
   link.addEventListener("click", () => setMenuState(false));
 });
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    setMenuState(false);
+  if (event.key !== "Escape" || menuButton?.getAttribute("aria-expanded") !== "true") {
+    return;
   }
+
+  setMenuState(false);
+  menuButton.focus();
 });
 
 window.addEventListener("resize", () => {
@@ -42,22 +54,36 @@ window.addEventListener("resize", () => {
   }
 });
 
-faqItems.forEach((item) => {
-  const trigger = item.querySelector("button");
-  const symbol = trigger?.querySelector("strong");
-
-  if (!trigger || !symbol) {
+const setActiveWork = (index) => {
+  if (!workCards.length) {
     return;
   }
 
-  trigger.addEventListener("click", () => {
-    const isOpen = item.classList.toggle("is-open");
-    trigger.setAttribute("aria-expanded", String(isOpen));
-    symbol.textContent = isOpen ? "-" : "+";
+  activeWorkIndex = (index + workCards.length) % workCards.length;
+
+  workCards.forEach((card, cardIndex) => {
+    card.classList.toggle("is-active", cardIndex === activeWorkIndex);
+  });
+
+  if (workIndex) {
+    workIndex.textContent = String(activeWorkIndex + 1).padStart(2, "0");
+  }
+};
+
+workCards.forEach((card, index) => {
+  card.addEventListener("pointerenter", () => setActiveWork(index));
+  card.addEventListener("focusin", () => setActiveWork(index));
+});
+
+workControls.forEach((control) => {
+  control.addEventListener("click", () => {
+    const direction = control.dataset.workControl === "next" ? 1 : -1;
+    setActiveWork(activeWorkIndex + direction);
+    workCards[activeWorkIndex]?.querySelector(".work-card-copy a")?.focus();
   });
 });
 
-const fallbackCopy = (value) => {
+const copyWithFallback = (value) => {
   const textArea = document.createElement("textarea");
   textArea.value = value;
   textArea.setAttribute("readonly", "");
@@ -70,213 +96,197 @@ const fallbackCopy = (value) => {
   return copied;
 };
 
-copyEmailButtons.forEach((button) => {
-  const email = button.dataset.copyEmail;
-  const status = button.querySelector(".copy-status");
+copyButton?.addEventListener("click", async () => {
+  const email = copyButton.dataset.copyEmail;
+  const status = copyButton.querySelector("small");
 
-  button.addEventListener("click", async () => {
-    if (!email || !status) {
-      return;
-    }
-
-    let copied = false;
-
-    try {
-      if (!navigator.clipboard?.writeText) {
-        throw new Error("Clipboard API unavailable");
-      }
-
-      await Promise.race([
-        navigator.clipboard.writeText(email),
-        new Promise((_, reject) => {
-          window.setTimeout(() => reject(new Error("Clipboard API timed out")), 500);
-        })
-      ]);
-      copied = true;
-    } catch {
-      copied = fallbackCopy(email);
-    }
-
-    status.textContent = copied ? "Copied" : email;
-
-    window.setTimeout(() => {
-      status.textContent = "Ready";
-    }, 2400);
-  });
-});
-
-const projectData = {
-  "green-wave": {
-    title: "Green Wave Landscaping",
-    type: "Local service business",
-    description: "A direct path from first impression to quote request.",
-    src: "assets/green-wave-landscaping-desktop.png",
-    alt: "Green Wave Landscaping website homepage",
-    url: "https://cosmicgames.info/GW/"
-  },
-  upstate: {
-    title: "Upstate Basketball League",
-    type: "Sports organization",
-    description: "Schedules, standings, teams, and league identity in one home.",
-    src: "assets/upstate-basketball-league-desktop.png",
-    alt: "Upstate Basketball League website homepage",
-    url: "https://nickblanchard04.github.io/upstate-basketball-league/concept/index.html"
-  }
-};
-
-const projectTabs = [...document.querySelectorAll("[data-project]")];
-const previewImage = document.querySelector("[data-preview-image]");
-const previewLink = document.querySelector("[data-preview-link]");
-const previewTitle = document.querySelector("[data-preview-title]");
-const previewType = document.querySelector("[data-preview-type]");
-const previewDescription = document.querySelector("[data-preview-description]");
-let previewTimer;
-
-const updateProjectPreview = (projectKey) => {
-  const project = projectData[projectKey];
-
-  if (!project || !previewImage || !previewLink || !previewTitle || !previewType || !previewDescription) {
+  if (!email || !status) {
     return;
   }
 
-  projectTabs.forEach((tab) => {
-    const isActive = tab.dataset.project === projectKey;
-    tab.setAttribute("aria-selected", String(isActive));
-    tab.tabIndex = isActive ? 0 : -1;
-  });
+  let copied = false;
 
-  window.clearTimeout(previewTimer);
-  previewImage.classList.add("is-switching");
+  try {
+    if (!navigator.clipboard?.writeText) {
+      throw new Error("Clipboard API unavailable");
+    }
 
-  const renderProject = () => {
-    previewImage.src = project.src;
-    previewImage.alt = project.alt;
-    previewLink.href = project.url;
-    previewLink.setAttribute("aria-label", `Open ${project.title} website`);
-    previewTitle.textContent = project.title;
-    previewType.textContent = project.type;
-    previewDescription.textContent = project.description;
-    previewImage.classList.remove("is-switching");
-  };
+    await navigator.clipboard.writeText(email);
+    copied = true;
+  } catch {
+    copied = copyWithFallback(email);
+  }
 
-  if (prefersReducedMotion) {
-    renderProject();
+  status.textContent = copied ? "Email copied" : "Select email";
+
+  window.setTimeout(() => {
+    status.textContent = "Copy email";
+  }, 2400);
+});
+
+hero?.addEventListener("pointermove", (event) => {
+  if (prefersReducedMotion || event.pointerType === "touch") {
     return;
   }
 
-  previewTimer = window.setTimeout(renderProject, 150);
-};
+  const bounds = hero.getBoundingClientRect();
+  const x = ((event.clientX - bounds.left) / bounds.width) * 100;
+  const y = ((event.clientY - bounds.top) / bounds.height) * 100;
 
-projectTabs.forEach((tab, index) => {
-  tab.addEventListener("click", () => {
-    updateProjectPreview(tab.dataset.project);
-  });
-
-  tab.addEventListener("keydown", (event) => {
-    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") {
-      return;
-    }
-
-    event.preventDefault();
-    const direction = event.key === "ArrowRight" ? 1 : -1;
-    const nextIndex = (index + direction + projectTabs.length) % projectTabs.length;
-    projectTabs[nextIndex].focus();
-    updateProjectPreview(projectTabs[nextIndex].dataset.project);
-  });
+  hero.style.setProperty("--pointer-x", `${x.toFixed(2)}%`);
+  hero.style.setProperty("--pointer-y", `${y.toFixed(2)}%`);
 });
 
-const previewStage = document.querySelector("[data-preview-stage]");
+hero?.addEventListener("pointerleave", () => {
+  hero.style.setProperty("--pointer-x", "70%");
+  hero.style.setProperty("--pointer-y", "35%");
+});
 
-if (previewStage && !prefersReducedMotion) {
-  previewStage.addEventListener("pointermove", (event) => {
-    const bounds = previewStage.getBoundingClientRect();
-    const x = Math.min(Math.max(event.clientX - bounds.left, 0), bounds.width);
-    const y = Math.min(Math.max(event.clientY - bounds.top, 0), bounds.height);
-    const shiftX = ((x / bounds.width) - 0.5) * 8;
-    const shiftY = ((y / bounds.height) - 0.5) * 8;
+if (storyLine) {
+  const words = storyLine.textContent.trim().split(/\s+/);
+  storyLine.replaceChildren();
 
-    previewStage.style.setProperty("--guide-x", `${x}px`);
-    previewStage.style.setProperty("--guide-y", `${y}px`);
-    previewStage.style.setProperty("--shift-x", `${shiftX.toFixed(2)}px`);
-    previewStage.style.setProperty("--shift-y", `${shiftY.toFixed(2)}px`);
-  });
+  words.forEach((word, index) => {
+    const span = document.createElement("span");
+    span.className = "word";
+    span.textContent = word;
+    storyLine.append(span);
 
-  previewStage.addEventListener("pointerleave", () => {
-    previewStage.style.setProperty("--guide-x", "50%");
-    previewStage.style.setProperty("--guide-y", "50%");
-    previewStage.style.setProperty("--shift-x", "0px");
-    previewStage.style.setProperty("--shift-y", "0px");
+    if (index < words.length - 1) {
+      storyLine.append(document.createTextNode(" "));
+    }
   });
 }
 
-const revealItems = document.querySelectorAll(".reveal");
+const initializeMotion = () => {
+  if (prefersReducedMotion || !window.gsap || !window.ScrollTrigger) {
+    return;
+  }
 
-if (prefersReducedMotion || !("IntersectionObserver" in window)) {
-  revealItems.forEach((item) => item.classList.add("is-visible"));
-} else {
-  const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) {
-        return;
+  const { gsap, ScrollTrigger } = window;
+  gsap.registerPlugin(ScrollTrigger);
+  document.body.classList.add("motion-ready");
+
+  const heroTimeline = gsap.timeline({
+    defaults: {
+      duration: 0.9,
+      ease: "power3.out"
+    }
+  });
+
+  heroTimeline.from(".site-header", {
+    y: -24,
+    opacity: 0
+  });
+
+  if (document.querySelector(".hero-role")) {
+    heroTimeline.from(".hero-role", {
+      y: 18,
+      opacity: 0
+    }, "-=0.42");
+  }
+
+  if (document.querySelector(".hero h1 span")) {
+    heroTimeline.from(".hero h1 span", {
+      yPercent: 55,
+      opacity: 0,
+      stagger: 0.09
+    }, "-=0.68");
+  }
+
+  const heroDetailTargets = [".hero-intro", ".hero-actions"]
+    .filter((selector) => document.querySelector(selector));
+
+  if (heroDetailTargets.length) {
+    heroTimeline.from(heroDetailTargets, {
+      y: 22,
+      opacity: 0,
+      stagger: 0.08
+    }, "-=0.52");
+  }
+
+  if (document.querySelector(".hero-frame-green")) {
+    heroTimeline.from(".hero-frame-green", {
+      x: 70,
+      y: -15,
+      rotation: 4,
+      opacity: 0,
+      duration: 1.1
+    }, "-=0.95");
+  }
+
+  if (document.querySelector(".hero-frame-ubl")) {
+    heroTimeline.from(".hero-frame-ubl", {
+      x: 85,
+      y: 25,
+      rotation: -4,
+      opacity: 0,
+      duration: 1.1
+    }, "-=0.82");
+  }
+
+  gsap.utils.toArray(".image-scale").forEach((image) => {
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: image,
+        start: "top 92%",
+        end: "bottom 8%",
+        scrub: 0.65
       }
+    })
+      .fromTo(image, {
+        scale: 0.9,
+        opacity: 0.38
+      }, {
+        scale: 1,
+        opacity: 1,
+        duration: 0.5,
+        ease: "none"
+      })
+      .to(image, {
+        scale: 1.025,
+        opacity: 0.35,
+        duration: 0.5,
+        ease: "none"
+      });
+  });
 
-      entry.target.classList.add("is-visible");
-      observer.unobserve(entry.target);
+  const storyWords = gsap.utils.toArray(".story-line .word");
+
+  if (storyWords.length) {
+    gsap.to(storyWords, {
+      color: "#f2efe8",
+      stagger: 0.08,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".story",
+        start: "top 72%",
+        end: "bottom 42%",
+        scrub: true
+      }
     });
-  }, {
-    rootMargin: "0px 0px -8% 0px",
-    threshold: 0.08
-  });
-
-  revealItems.forEach((item) => revealObserver.observe(item));
-}
-
-const projectForm = document.querySelector("#project-brief-form");
-const formStatus = document.querySelector("#form-status");
-const packageSelect = projectForm?.querySelector('select[name="package"]');
-const packageLinks = document.querySelectorAll("[data-package]");
-
-packageLinks.forEach((link) => {
-  link.addEventListener("click", () => {
-    if (!packageSelect) {
-      return;
-    }
-
-    packageSelect.value = link.dataset.package;
-  });
-});
-
-projectForm?.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  if (!projectForm.reportValidity()) {
-    return;
   }
 
-  const data = new FormData(projectForm);
-  const name = data.get("name");
-  const email = data.get("email");
-  const business = data.get("business");
-  const selectedPackage = data.get("package");
-  const goal = data.get("goal");
-  const subject = `Website project from ${business}`;
-  const message = [
-    `Name: ${name}`,
-    `Email: ${email}`,
-    `Business: ${business}`,
-    `Starting point: ${selectedPackage}`,
-    "",
-    "Website goal:",
-    goal
-  ].join("\n");
-  const mailto = `mailto:nickblanchardbusiness@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+  gsap.utils.toArray(".service-grid article, .process-list li").forEach((item) => {
+    gsap.from(item, {
+      y: 34,
+      opacity: 0,
+      duration: 0.78,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: item,
+        start: "top 88%",
+        toggleActions: "play none none none"
+      }
+    });
+  });
 
-  if (formStatus) {
-    formStatus.textContent = "Your email app is opening with the project brief filled in.";
-  }
+  document.fonts?.ready.then(() => ScrollTrigger.refresh());
+  window.addEventListener("load", () => ScrollTrigger.refresh(), { once: true });
+};
 
-  window.location.href = mailto;
-});
+initializeMotion();
+setActiveWork(0);
 
 if (currentYear) {
   currentYear.textContent = new Date().getFullYear();

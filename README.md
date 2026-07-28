@@ -1,10 +1,23 @@
-# Nick Blanchard Web Design
+# Built by Blanch
 
-A WebEaze-inspired service landing page for Nick Blanchard's web design business. The site is written as a small-business offer instead of a portfolio-only page.
+Personal web-design studio site for Nick Blanchard.
 
-## Preview Locally
+## Positioning
 
-From this folder, run:
+Built by Blanch creates clear, modern websites for local small businesses in
+Saratoga, Lake George, Glens Falls, and nearby New York communities.
+
+## Stack
+
+- Semantic HTML
+- Responsive CSS
+- Vanilla JavaScript
+- GSAP and ScrollTrigger from jsDelivr
+- GitHub Pages-compatible static hosting
+
+## Local preview
+
+Run any static server from this directory, for example:
 
 ```powershell
 python -m http.server 4173
@@ -12,13 +25,8 @@ python -m http.server 4173
 
 Then open `http://localhost:4173`.
 
-## Main Files
+## Custom domain
 
-- `index.html` contains the landing page content and section structure.
-- `styles.css` contains the light visual system, responsive layout, ticker, cards, and package styling.
-- `script.js` controls the mobile menu and FAQ accordion.
-- `assets/` contains the project screenshots and favicon.
-
-## Contact
-
-Portfolio inquiries go to `nickblanchardbusiness@gmail.com`.
+The production metadata is prepared for `https://builtbyblanch.com/`.
+Activating the domain still requires an authorized GitHub Pages custom-domain
+configuration and the matching DNS records at the domain provider.
