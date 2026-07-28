@@ -6,8 +6,6 @@ const mobileMenuLinks = [...document.querySelectorAll(".mobile-menu a")];
 const currentYear = document.querySelector("[data-current-year]");
 const copyButton = document.querySelector("[data-copy-email]");
 const workCards = [...document.querySelectorAll("[data-work-card]")];
-const workIndex = document.querySelector("[data-work-index]");
-const workControls = [...document.querySelectorAll("[data-work-control]")];
 const hero = document.querySelector(".hero");
 const storyLine = document.querySelector(".story-line");
 const viewedWorkProjects = new Set();
@@ -143,10 +141,6 @@ const setActiveWork = (index) => {
     card.classList.toggle("is-active", cardIndex === activeWorkIndex);
   });
 
-  if (workIndex) {
-    workIndex.textContent = String(activeWorkIndex + 1).padStart(2, "0");
-  }
-
   const activeCard = workCards[activeWorkIndex];
   const projectId = activeCard?.dataset.analyticsProject;
 
@@ -163,14 +157,6 @@ const setActiveWork = (index) => {
 workCards.forEach((card, index) => {
   card.addEventListener("pointerenter", () => setActiveWork(index));
   card.addEventListener("focusin", () => setActiveWork(index));
-});
-
-workControls.forEach((control) => {
-  control.addEventListener("click", () => {
-    const direction = control.dataset.workControl === "next" ? 1 : -1;
-    setActiveWork(activeWorkIndex + direction);
-    workCards[activeWorkIndex]?.querySelector(".work-card-copy a")?.focus();
-  });
 });
 
 const copyWithFallback = (value) => {
@@ -316,29 +302,26 @@ const initializeMotion = () => {
 
   const heroTimeline = gsap.timeline({
     defaults: {
-      duration: 0.9,
+      duration: 0.58,
       ease: "power3.out"
     }
   });
 
   heroTimeline.from(".site-header", {
-    y: -24,
-    opacity: 0
+    y: -12
   });
 
   if (document.querySelector(".hero-role")) {
     heroTimeline.from(".hero-role", {
-      y: 18,
-      opacity: 0
-    }, "-=0.42");
+      y: 10
+    }, "-=0.3");
   }
 
   if (document.querySelector(".hero h1 span")) {
     heroTimeline.from(".hero h1 span", {
-      yPercent: 55,
-      opacity: 0,
-      stagger: 0.09
-    }, "-=0.68");
+      yPercent: 12,
+      stagger: 0.06
+    }, "-=0.46");
   }
 
   const heroDetailTargets = [".hero-intro", ".hero-actions"]
@@ -346,24 +329,23 @@ const initializeMotion = () => {
 
   if (heroDetailTargets.length) {
     heroTimeline.from(heroDetailTargets, {
-      y: 22,
-      opacity: 0,
+      y: 12,
       stagger: 0.08
-    }, "-=0.52");
+    }, "-=0.38");
   }
 
   if (document.querySelector(".hero-frame-green")) {
     heroTimeline.from(".hero-frame-green", {
-      opacity: 0,
-      duration: 1.1
-    }, "-=0.95");
+      y: 10,
+      duration: 0.72
+    }, "-=0.62");
   }
 
   if (document.querySelector(".hero-frame-ubl")) {
     heroTimeline.from(".hero-frame-ubl", {
-      opacity: 0,
-      duration: 1.1
-    }, "-=0.82");
+      y: 12,
+      duration: 0.72
+    }, "-=0.56");
   }
 
   gsap.utils.toArray(".image-scale").forEach((image) => {
