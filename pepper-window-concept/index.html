@@ -61,8 +61,8 @@
     <link rel="preload" href="./assets/fonts/league-gothic-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="./assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="./assets/images/pepper-window-table-spread.webp" as="image" type="image/webp" />
-    <link rel="stylesheet" href="./styles.css?v=20260728-pepper-window-1" />
-    <script src="./script.js?v=20260728-pepper-window-1" defer></script>
+    <link rel="stylesheet" href="./styles.css?v=20260729-pepper-window-2" />
+    <script src="./script.js?v=20260729-pepper-window-2" defer></script>
 
     <script type="application/ld+json">
       {
@@ -139,7 +139,7 @@
       </nav>
 
       <button class="header-order-button" type="button" data-open-order>
-        <span>Demo order</span>
+        <span>Sample order</span>
         <span class="header-order-count" data-cart-count hidden>0</span>
       </button>
 
@@ -161,11 +161,11 @@
         <a href="#menu">Menu</a>
         <a href="#story">Story</a>
         <a href="#visit">Visit</a>
-        <button type="button" data-open-order>Open demo order</button>
+        <button type="button" data-open-order>View sample order</button>
       </nav>
     </header>
 
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-wordmark" aria-hidden="true">
           <span>PEPPER</span>
@@ -191,7 +191,7 @@
           </div>
           <div class="hero-copy-rule" aria-hidden="true"></div>
           <div>
-            <h1 id="hero-title">Pull up.<br />Pass a plate.</h1>
+            <h1 id="hero-title">Pull up.<br /> Pass a plate.</h1>
             <p>
               This industry concept imagines blistered flatbreads, charred vegetables, and cold drinks
               within a warm, graphic neighborhood restaurant experience.
@@ -206,8 +206,8 @@
               <path d="M5 12h14M13 6l6 6-6 6" />
             </svg>
           </a>
-          <a class="button button--butter" href="#reservation-demo">
-            <span>Try a demo table</span>
+          <a class="button button--butter" href="#reservation-preview">
+            <span>Preview a table</span>
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M5 12h14M13 6l6 6-6 6" />
             </svg>
@@ -230,7 +230,7 @@
         <div class="section-heading section-heading--menu" data-reveal>
           <div>
             <p class="section-label">Sample menu · Fictional pricing</p>
-            <h2 id="menu-title">Built to share.<br />Fine if you don’t.</h2>
+            <h2 id="menu-title">Built to share.<br /> Fine if you don’t.</h2>
           </div>
           <p>
             The sample menu follows the oven: crisp edges, bright sauces, cold crunch. Dietary markers
@@ -256,7 +256,6 @@
               </div>
 
               <article class="menu-item">
-                <div class="menu-item-number" aria-hidden="true">01</div>
                 <div class="menu-item-copy">
                   <div class="menu-item-title-line">
                     <h4>Salt-and-citrus olives</h4>
@@ -273,13 +272,11 @@
                   data-item-name="Salt-and-citrus olives"
                   data-item-price="7"
                 >
-                  <span class="demo-marker" aria-hidden="true">Demo</span>
-                  <span>Add to demo bag</span>
+                  <span>Add for preview</span>
                 </button>
               </article>
 
               <article class="menu-item">
-                <div class="menu-item-number menu-item-number--blue" aria-hidden="true">02</div>
                 <div class="menu-item-copy">
                   <div class="menu-item-title-line">
                     <h4>Crisp chickpeas</h4>
@@ -296,13 +293,11 @@
                   data-item-name="Crisp chickpeas"
                   data-item-price="6"
                 >
-                  <span class="demo-marker" aria-hidden="true">Demo</span>
-                  <span>Add to demo bag</span>
+                  <span>Add for preview</span>
                 </button>
               </article>
 
               <article class="menu-item">
-                <div class="menu-item-number menu-item-number--butter" aria-hidden="true">03</div>
                 <div class="menu-item-copy">
                   <div class="menu-item-title-line">
                     <h4>Whipped feta</h4>
@@ -319,13 +314,11 @@
                   data-item-name="Whipped feta"
                   data-item-price="11"
                 >
-                  <span class="demo-marker" aria-hidden="true">Demo</span>
-                  <span>Add to demo bag</span>
+                  <span>Add for preview</span>
                 </button>
               </article>
 
               <article class="menu-item">
-                <div class="menu-item-number" aria-hidden="true">04</div>
                 <div class="menu-item-copy">
                   <div class="menu-item-title-line">
                     <h4>Warm focaccia</h4>
@@ -342,8 +335,7 @@
                   data-item-name="Warm focaccia"
                   data-item-price="8"
                 >
-                  <span class="demo-marker" aria-hidden="true">Demo</span>
-                  <span>Add to demo bag</span>
+                  <span>Add for preview</span>
                 </button>
               </article>
             </div>
@@ -355,7 +347,6 @@
               </div>
 
               <article class="menu-item">
-                <div class="menu-item-number" aria-hidden="true">01</div>
                 <div class="menu-item-copy">
                   <div class="menu-item-title-line">
                     <h4>Marigold Chopped</h4>
@@ -372,13 +363,11 @@
                   data-item-name="Marigold Chopped"
                   data-item-price="15"
                 >
-                  <span class="demo-marker" aria-hidden="true">Demo</span>
-                  <span>Add to demo bag</span>
+                  <span>Add for preview</span>
                 </button>
               </article>
 
               <article class="menu-item">
-                <div class="menu-item-number menu-item-number--blue" aria-hidden="true">02</div>
                 <div class="menu-item-copy">
                   <div class="menu-item-title-line">
                     <h4>Cabbage Snap</h4>
@@ -395,8 +384,7 @@
                   data-item-name="Cabbage Snap"
                   data-item-price="13"
                 >
-                  <span class="demo-marker" aria-hidden="true">Demo</span>
-                  <span>Add to demo bag</span>
+                  <span>Add for preview</span>
                 </button>
               </article>
             </div>
@@ -408,7 +396,6 @@
               </div>
 
               <article class="menu-item">
-                <div class="menu-item-number" aria-hidden="true">01</div>
                 <div class="menu-item-copy">
                   <div class="menu-item-title-line">
                     <h4>Red Tile</h4>
@@ -425,13 +412,11 @@
                   data-item-name="Red Tile"
                   data-item-price="17"
                 >
-                  <span class="demo-marker" aria-hidden="true">Demo</span>
-                  <span>Add to demo bag</span>
+                  <span>Add for preview</span>
                 </button>
               </article>
 
               <article class="menu-item">
-                <div class="menu-item-number menu-item-number--blue" aria-hidden="true">02</div>
                 <div class="menu-item-copy">
                   <div class="menu-item-title-line">
                     <h4>Green Window</h4>
@@ -448,13 +433,11 @@
                   data-item-name="Green Window"
                   data-item-price="19"
                 >
-                  <span class="demo-marker" aria-hidden="true">Demo</span>
-                  <span>Add to demo bag</span>
+                  <span>Add for preview</span>
                 </button>
               </article>
 
               <article class="menu-item">
-                <div class="menu-item-number menu-item-number--butter" aria-hidden="true">03</div>
                 <div class="menu-item-copy">
                   <div class="menu-item-title-line">
                     <h4>The Corner</h4>
@@ -470,13 +453,11 @@
                   data-item-name="The Corner"
                   data-item-price="21"
                 >
-                  <span class="demo-marker" aria-hidden="true">Demo</span>
-                  <span>Add to demo bag</span>
+                  <span>Add for preview</span>
                 </button>
               </article>
 
               <article class="menu-item">
-                <div class="menu-item-number" aria-hidden="true">04</div>
                 <div class="menu-item-copy">
                   <div class="menu-item-title-line">
                     <h4>Midnight Onion</h4>
@@ -493,8 +474,7 @@
                   data-item-name="Midnight Onion"
                   data-item-price="20"
                 >
-                  <span class="demo-marker" aria-hidden="true">Demo</span>
-                  <span>Add to demo bag</span>
+                  <span>Add for preview</span>
                 </button>
               </article>
             </div>
@@ -506,7 +486,6 @@
               </div>
 
               <article class="menu-item">
-                <div class="menu-item-number" aria-hidden="true">01</div>
                 <div class="menu-item-copy">
                   <div class="menu-item-title-line">
                     <h4>Saffron Cauliflower</h4>
@@ -523,13 +502,11 @@
                   data-item-name="Saffron Cauliflower"
                   data-item-price="22"
                 >
-                  <span class="demo-marker" aria-hidden="true">Demo</span>
-                  <span>Add to demo bag</span>
+                  <span>Add for preview</span>
                 </button>
               </article>
 
               <article class="menu-item">
-                <div class="menu-item-number menu-item-number--blue" aria-hidden="true">02</div>
                 <div class="menu-item-copy">
                   <div class="menu-item-title-line">
                     <h4>Brick-Pressed Pork</h4>
@@ -546,13 +523,11 @@
                   data-item-name="Brick-Pressed Pork"
                   data-item-price="28"
                 >
-                  <span class="demo-marker" aria-hidden="true">Demo</span>
-                  <span>Add to demo bag</span>
+                  <span>Add for preview</span>
                 </button>
               </article>
 
               <article class="menu-item">
-                <div class="menu-item-number menu-item-number--butter" aria-hidden="true">03</div>
                 <div class="menu-item-copy">
                   <div class="menu-item-title-line">
                     <h4>Coal-Roasted Trout</h4>
@@ -569,13 +544,11 @@
                   data-item-name="Coal-Roasted Trout"
                   data-item-price="29"
                 >
-                  <span class="demo-marker" aria-hidden="true">Demo</span>
-                  <span>Add to demo bag</span>
+                  <span>Add for preview</span>
                 </button>
               </article>
 
               <article class="menu-item">
-                <div class="menu-item-number" aria-hidden="true">04</div>
                 <div class="menu-item-copy">
                   <div class="menu-item-title-line">
                     <h4>Butter Bean Pot</h4>
@@ -592,8 +565,7 @@
                   data-item-name="Butter Bean Pot"
                   data-item-price="21"
                 >
-                  <span class="demo-marker" aria-hidden="true">Demo</span>
-                  <span>Add to demo bag</span>
+                  <span>Add for preview</span>
                 </button>
               </article>
             </div>
@@ -605,7 +577,6 @@
               </div>
 
               <article class="menu-item">
-                <div class="menu-item-number" aria-hidden="true">01</div>
                 <div class="menu-item-copy">
                   <div class="menu-item-title-line">
                     <h4>Olive oil cake</h4>
@@ -621,13 +592,11 @@
                   data-item-name="Olive oil cake"
                   data-item-price="10"
                 >
-                  <span class="demo-marker" aria-hidden="true">Demo</span>
-                  <span>Add to demo bag</span>
+                  <span>Add for preview</span>
                 </button>
               </article>
 
               <article class="menu-item">
-                <div class="menu-item-number menu-item-number--blue" aria-hidden="true">02</div>
                 <div class="menu-item-copy">
                   <div class="menu-item-title-line">
                     <h4>Salted chocolate pot</h4>
@@ -644,13 +613,11 @@
                   data-item-name="Salted chocolate pot"
                   data-item-price="10"
                 >
-                  <span class="demo-marker" aria-hidden="true">Demo</span>
-                  <span>Add to demo bag</span>
+                  <span>Add for preview</span>
                 </button>
               </article>
 
               <article class="menu-item">
-                <div class="menu-item-number menu-item-number--butter" aria-hidden="true">03</div>
                 <div class="menu-item-copy">
                   <div class="menu-item-title-line">
                     <h4>Soft-serve twist</h4>
@@ -666,8 +633,7 @@
                   data-item-name="Soft-serve twist"
                   data-item-price="8"
                 >
-                  <span class="demo-marker" aria-hidden="true">Demo</span>
-                  <span>Add to demo bag</span>
+                  <span>Add for preview</span>
                 </button>
               </article>
             </div>
@@ -679,7 +645,6 @@
               </div>
 
               <article class="menu-item">
-                <div class="menu-item-number" aria-hidden="true">01</div>
                 <div class="menu-item-copy">
                   <div class="menu-item-title-line">
                     <h4>Sunroom Fizz</h4>
@@ -696,13 +661,11 @@
                   data-item-name="Sunroom Fizz"
                   data-item-price="7"
                 >
-                  <span class="demo-marker" aria-hidden="true">Demo</span>
-                  <span>Add to demo bag</span>
+                  <span>Add for preview</span>
                 </button>
               </article>
 
               <article class="menu-item">
-                <div class="menu-item-number menu-item-number--blue" aria-hidden="true">02</div>
                 <div class="menu-item-copy">
                   <div class="menu-item-title-line">
                     <h4>Blue Door</h4>
@@ -719,13 +682,11 @@
                   data-item-name="Blue Door"
                   data-item-price="7"
                 >
-                  <span class="demo-marker" aria-hidden="true">Demo</span>
-                  <span>Add to demo bag</span>
+                  <span>Add for preview</span>
                 </button>
               </article>
 
               <article class="menu-item">
-                <div class="menu-item-number menu-item-number--butter" aria-hidden="true">03</div>
                 <div class="menu-item-copy">
                   <div class="menu-item-title-line">
                     <h4>Window Spritz</h4>
@@ -741,13 +702,11 @@
                   data-item-name="Window Spritz"
                   data-item-price="13"
                 >
-                  <span class="demo-marker" aria-hidden="true">Demo</span>
-                  <span>Add to demo bag</span>
+                  <span>Add for preview</span>
                 </button>
               </article>
 
               <article class="menu-item">
-                <div class="menu-item-number" aria-hidden="true">04</div>
                 <div class="menu-item-copy">
                   <div class="menu-item-title-line">
                     <h4>Alder Pils</h4>
@@ -763,8 +722,7 @@
                   data-item-name="Alder Pils"
                   data-item-price="8"
                 >
-                  <span class="demo-marker" aria-hidden="true">Demo</span>
-                  <span>Add to demo bag</span>
+                  <span>Add for preview</span>
                 </button>
               </article>
             </div>
@@ -788,7 +746,7 @@
               <span>One flatbread, something crunchy, something cold.</span>
             </div>
             <button class="menu-feature-order" type="button" data-open-order>
-              <span>Open demo bag</span>
+              <span>View sample order</span>
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
@@ -804,7 +762,7 @@
             <span>WINDOW</span>
           </div>
           <div>
-            <h2 id="story-title">A window worth<br />walking toward.</h2>
+            <h2 id="story-title">A window worth<br /> walking toward.</h2>
             <p>
               Pepper Window imagines the kind of place that knows the after-work drop-in, the stroller
               parked by the banquette, and the friend who always wants the corner seat. The oven does
@@ -848,18 +806,18 @@
 
         <div class="story-principles" aria-label="Concept service principles">
           <article data-reveal>
-            <span aria-hidden="true">01</span>
-            <h3>Open oven.<br />Honest food.</h3>
+            <p class="principle-label">From the kitchen</p>
+            <h3>Open oven.<br /> Honest food.</h3>
             <p>A conceptual menu direction led by the oven, seasonal produce, and direct descriptions.</p>
           </article>
           <article data-reveal>
-            <span aria-hidden="true">02</span>
-            <h3>Neighborhood<br />first.</h3>
+            <p class="principle-label">For the room</p>
+            <h3>Neighborhood<br /> first.</h3>
             <p>An imagined service direction built around warmth, local character, and room to linger.</p>
           </article>
           <article data-reveal>
-            <span aria-hidden="true">03</span>
-            <h3>Warm service.<br />No theater.</h3>
+            <p class="principle-label">Concept boundary</p>
+            <h3>Warm service.<br /> No theater.</h3>
             <p>A clear hospitality concept without invented testimonials, reviews, or performance claims.</p>
           </article>
         </div>
@@ -873,7 +831,7 @@
             <span>PEPPER</span>
             <span>WINDOW</span>
           </div>
-          <h2 id="visit-title">Your corner,<br />in another universe.</h2>
+          <h2 id="visit-title">Your corner,<br /> in another universe.</h2>
 
           <div class="visit-information">
             <div>
@@ -893,16 +851,16 @@
           </div>
         </div>
 
-        <div class="reservation-panel" id="reservation-demo" data-reveal>
+        <div class="reservation-panel" id="reservation-preview" data-reveal>
           <div class="reservation-heading">
-            <span class="demo-block">Demo</span>
+            <span class="preview-kicker">Table finder preview</span>
             <div>
-              <h2 id="reservation-demo-title">Find a pretend table.</h2>
-              <p>Choose a date, time, and party size to explore the interaction. Nothing is booked.</p>
+              <h2 id="reservation-preview-title">Preview a table.</h2>
+              <p>Choose a date, time, and party size to see how the experience responds. No reservation is created.</p>
             </div>
           </div>
 
-          <div id="reservation-controls" role="group" aria-labelledby="reservation-demo-title">
+          <div id="reservation-controls" role="group" aria-labelledby="reservation-preview-title">
             <div class="form-field">
               <label for="reservation-date">Date</label>
               <input id="reservation-date" type="date" required />
@@ -937,8 +895,8 @@
               <span>No name, email, phone number, or payment details are collected.</span>
             </div>
 
-            <button class="button button--tomato form-field--wide" type="button" data-reservation-demo>
-              <span>Hold this demo table</span>
+            <button class="button button--tomato form-field--wide" type="button" data-reservation-preview>
+              <span>Preview table selection</span>
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
@@ -961,7 +919,7 @@
         Pepper Window is a fictional restaurant identity and website concept created by Built by Blanch.
         This is not a client project or an operating business. It represents no real customers, location,
         bookings, orders, reviews, or business results. No orders, reservations, payments, or messages are accepted.
-        All food and interior images are original generated concept scenes, not documentary client photography.
+        All food and interior imagery was created specifically for this fictional concept and is not documentary client photography.
       </p>
 
       <div class="footer-links">
@@ -984,9 +942,9 @@
           <path d="M6 8h12l1 13H5L6 8Z" />
           <path d="M9 8V6a3 3 0 0 1 6 0v2" />
         </svg>
-        Demo bag (<span data-cart-count>0</span>)
+        Sample order (<span data-cart-count>0</span>)
       </span>
-      <span>View bag</span>
+      <span>View selection</span>
     </button>
 
     <dialog class="order-dialog" id="order-dialog" aria-labelledby="order-dialog-title">
@@ -998,11 +956,11 @@
               <span>Industry Demonstration</span>
               <span>Not a client project</span>
             </div>
-            <span class="demo-block">Demo only</span>
-            <h2 id="order-dialog-title">Build a demo order.</h2>
-            <p>No food is prepared and no payment is collected.</p>
+            <span class="preview-kicker">Order preview</span>
+            <h2 id="order-dialog-title">Build a sample order.</h2>
+            <p>This interaction stops before checkout. No food is prepared and no payment is collected.</p>
           </div>
-          <button class="icon-button" type="button" data-close-order aria-label="Close demo order">
+          <button class="icon-button" type="button" data-close-order aria-label="Close sample order">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M5 5l14 14M19 5 5 19" />
             </svg>
@@ -1011,8 +969,8 @@
 
         <div class="order-view" data-order-view="bag">
           <div class="cart-empty" data-cart-empty>
-            <h3>Your demo bag is empty.</h3>
-            <p>Add something from the sample menu to try the interaction.</p>
+            <h3>Your sample order is empty.</h3>
+            <p>Choose something from the sample menu to explore the interaction.</p>
             <button class="button button--butter" type="button" data-close-order>Browse the sample menu</button>
           </div>
 
@@ -1037,7 +995,7 @@
               </div>
 
               <button class="button button--tomato" type="button" data-review-order>
-                <span>Review demo order</span>
+                <span>Review sample order</span>
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
@@ -1052,11 +1010,11 @@
               <path d="M14 32 27 45 51 19" />
             </svg>
           </div>
-          <h3>Looks delicious.<br />Still fictional.</h3>
+          <h3>Looks delicious.<br /> Still fictional.</h3>
           <p>This preview stops before checkout. No order has been sent.</p>
           <div class="confirmation-actions">
             <button class="button button--butter" type="button" data-keep-browsing>Keep browsing</button>
-            <button class="text-button" type="button" data-clear-cart>Clear demo bag</button>
+            <button class="text-button" type="button" data-clear-cart>Clear sample order</button>
           </div>
         </div>
       </div>
@@ -1068,7 +1026,7 @@
           class="icon-button reservation-dialog-close"
           type="button"
           data-close-reservation
-          aria-label="Close reservation demo"
+          aria-label="Close table preview"
         >
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M5 5l14 14M19 5 5 19" />
@@ -1079,8 +1037,8 @@
           <span>Industry Demonstration</span>
           <span>Not a client project</span>
         </div>
-        <span class="demo-block">Demo availability</span>
-        <h2 id="reservation-dialog-title">A pretend table,<br />just for the prototype.</h2>
+        <span class="preview-kicker">Table preview</span>
+        <h2 id="reservation-dialog-title">A table preview,<br /> not a booking.</h2>
         <p data-reservation-summary></p>
         <p>No reservation has been created and no contact information was saved.</p>
         <button class="button button--butter" type="button" data-close-reservation>Return to site</button>

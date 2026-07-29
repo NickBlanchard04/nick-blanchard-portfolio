@@ -27,7 +27,7 @@ const closeReservationButtons = [...document.querySelectorAll("[data-close-reser
 const reservationDate = document.querySelector("#reservation-date");
 const reservationTime = document.querySelector("#reservation-time");
 const reservationParty = document.querySelector("#reservation-party");
-const reservationActionButton = document.querySelector("[data-reservation-demo]");
+const reservationActionButton = document.querySelector("[data-reservation-preview]");
 
 const cart = new Map();
 const addFeedbackTimers = new WeakMap();
@@ -119,7 +119,7 @@ const renderCart = () => {
     removeButton.dataset.cartAction = "remove";
     removeButton.dataset.itemId = item.id;
     removeButton.textContent = "Remove";
-    removeButton.setAttribute("aria-label", `Remove ${item.name} from demo bag`);
+    removeButton.setAttribute("aria-label", `Remove ${item.name} from sample order`);
 
     controls.append(decreaseButton, quantity, increaseButton, removeButton);
     cartItem.append(heading, price, controls);
@@ -143,7 +143,7 @@ const addItem = (button) => {
   renderCart();
   const currentCount = getCartCount();
   announce(
-    `${item.name} added for preview. Demo bag now has ${currentCount} ${currentCount === 1 ? "item" : "items"}.`,
+    `${item.name} added for preview. Sample order now has ${currentCount} ${currentCount === 1 ? "item" : "items"}.`,
   );
 
   const feedbackLabel = button.querySelector("span:last-child");
@@ -176,7 +176,7 @@ const updateCartItem = (itemId, action) => {
     item.quantity -= 1;
     if (item.quantity <= 0) {
       cart.delete(itemId);
-      announce(`${item.name} removed from the demo bag.`);
+      announce(`${item.name} removed from the sample order.`);
     } else {
       announce(`${item.name} quantity decreased to ${item.quantity}.`);
     }
@@ -184,7 +184,7 @@ const updateCartItem = (itemId, action) => {
 
   if (action === "remove") {
     cart.delete(itemId);
-    announce(`${item.name} removed from the demo bag.`);
+    announce(`${item.name} removed from the sample order.`);
   }
 
   renderCart();
@@ -258,7 +258,7 @@ clearCartButton.addEventListener("click", () => {
   cart.clear();
   renderCart();
   setOrderView("bag");
-  announce("Demo bag cleared.");
+  announce("Sample order cleared.");
   cartEmptyNode.querySelector("button").focus();
 });
 
@@ -330,7 +330,7 @@ const localDate = new Date(today.getTime() - today.getTimezoneOffset() * 60_000)
   .split("T")[0];
 reservationDate.min = localDate;
 
-const openReservationDemo = () => {
+const openReservationPreview = () => {
   const requiredFields = [reservationDate, reservationTime, reservationParty];
   const invalidField = requiredFields.find((field) => !field?.checkValidity());
 
@@ -354,12 +354,12 @@ const openReservationDemo = () => {
   reservationDialog.querySelector("[data-close-reservation]").focus();
 };
 
-reservationActionButton.addEventListener("click", openReservationDemo);
+reservationActionButton.addEventListener("click", openReservationPreview);
 
 reservationControls.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     event.preventDefault();
-    openReservationDemo();
+    openReservationPreview();
   }
 });
 
