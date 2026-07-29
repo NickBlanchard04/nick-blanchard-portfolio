@@ -304,18 +304,28 @@ const paymentCopy = [
   "A final comparison could help someone weigh timing and payment paths without pressure. No option shown here is offered.",
 ];
 
+const paymentLabels = ["Understand", "Estimate", "Choose"];
+const paymentFlowLabels = ["Continue to Estimate", "Continue to Choose", "Return to Understand"];
+
 function selectPaymentStep(index) {
   $$(".payment-step").forEach((step, stepIndex) => {
     const selected = stepIndex === index;
     step.classList.toggle("is-active", selected);
     step.setAttribute("aria-pressed", String(selected));
   });
+  $("#payment-detail-title").textContent = paymentLabels[index];
   $("#payment-detail-copy").textContent = paymentCopy[index];
+  $("#payment-flow-label").textContent = paymentFlowLabels[index];
   $("#payment-flow-button").dataset.currentStep = String(index);
 }
 
 $$(".payment-step").forEach((button, index) => {
   button.addEventListener("click", () => selectPaymentStep(index));
+  button.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    selectPaymentStep(index);
+  });
 });
 
 $("#payment-flow-button").addEventListener("click", (event) => {
