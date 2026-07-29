@@ -122,12 +122,13 @@
           <nav class="desktop-nav" aria-label="Primary navigation">
             <a href="#care">Care</a>
             <a href="#approach">Our approach</a>
+            <a href="#team">Team</a>
             <a href="#visit">Visit</a>
             <a href="#payment">Payment</a>
           </nav>
 
           <button class="button button--header desktop-booking" type="button" data-open-booking>
-            Request a demo visit
+            Preview a visit request
           </button>
 
           <button
@@ -150,10 +151,11 @@
             <a href="#care">Care</a>
             <a href="#approach">Our approach</a>
             <a href="#cases">Illustrative cases</a>
+            <a href="#team">Team</a>
             <a href="#visit">Visit</a>
             <a href="#payment">Payment</a>
             <button class="button button--primary" type="button" data-open-booking>
-              Request a demo visit
+              Preview a visit request
             </button>
             <p>Concept interaction only. No appointment will be made.</p>
           </div>
@@ -171,7 +173,7 @@
             </p>
             <div class="hero__actions">
               <button class="button button--primary hero__booking-trigger" type="button" data-open-booking>
-                Request a demo visit
+                Preview a visit request
               </button>
               <a class="text-link" href="#care">
                 Explore care
@@ -192,13 +194,12 @@
               fetchpriority="high"
             />
             <figcaption>
-              AI-generated concept image · Fictional people · No real dentist or patient
-              <span aria-hidden="true">01 / 04</span>
+              Original concept image · Fictional people · No real dentist or patient
             </figcaption>
           </figure>
         </div>
 
-        <div class="quick-booking shell" id="quick-booking" role="group" aria-label="Demo visit preferences">
+        <div class="quick-booking shell" id="quick-booking" role="group" aria-label="Visit-request preferences">
           <div class="quick-booking__field">
             <label for="quick-reason">I’m looking for</label>
             <select id="quick-reason">
@@ -224,9 +225,9 @@
             </select>
           </div>
           <button class="button button--primary quick-booking__action" type="button">
-            Check demo availability
+            Preview availability response
           </button>
-          <p class="quick-booking__disclosure">Demo only. No availability is checked.</p>
+          <p class="quick-booking__disclosure">Portfolio interaction only. No availability is checked.</p>
         </div>
       </section>
 
@@ -240,106 +241,167 @@
             <p>No provider, treatment, availability, or clinical service is represented or offered.</p>
           </div>
 
-          <div class="service-navigator reveal">
-            <article class="service-feature" aria-live="polite">
-              <img
-                src="assets/images/service-still-life.webp"
-                alt="Dental mirror and explorer in a ceramic cup beside a fern-colored linen towel"
-                width="1098"
-                height="1372"
-                loading="lazy"
-              />
-              <div class="service-feature__copy">
-                <p class="service-feature__position">Featured service</p>
-                <h3 id="service-feature-title">Family care</h3>
-                <p id="service-feature-copy">Checkups, hygiene and growing-smile support for every chapter.</p>
-                <button class="text-link text-link--button" type="button" data-open-booking data-booking-reason="Family care">
-                  See what to expect
-                  <svg aria-hidden="true" viewBox="0 0 24 24">
-                    <path d="M5 12h13M14 7l5 5-5 5" />
-                  </svg>
-                </button>
-              </div>
-            </article>
-
-            <div class="service-list" role="list" aria-label="Care options">
-              <div class="service-list__item is-selected" role="listitem">
+          <div class="service-card-region reveal">
+            <p class="service-card-region__instruction">
+              Select any card to turn it over. Keyboard users can press Enter or Space.
+            </p>
+            <ul class="service-grid" aria-label="Illustrative care options">
+              <li class="service-card">
+                <h3 class="visually-hidden">Family care</h3>
                 <button
-                  type="button"
-                  aria-expanded="true"
-                  data-service="Family care"
-                  data-service-copy="Checkups, hygiene and growing-smile support for every chapter."
-                  data-service-detail="Comfortable visits for every age, from first checkups to growth and beyond."
-                >
-                  <span class="service-list__index" aria-hidden="true">01</span>
-                  <span>Family care</span>
-                  <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M14 7l5 5-5 5" /></svg>
-                </button>
-                <p class="service-list__mobile-detail">Comfortable visits for every age, from first checkups to growth and beyond.</p>
-              </div>
-              <div class="service-list__item" role="listitem">
-                <button
+                  class="service-card__button"
                   type="button"
                   aria-expanded="false"
-                  data-service="Comfort visits"
-                  data-service-copy="A slower pace, clear cues and room to pause whenever you need."
-                  data-service-detail="Sample copy emphasizes a slower pace, clear explanations, and frequent check-ins."
+                  aria-controls="service-family-details"
+                  aria-label="Family care: show details"
+                  data-service-card
+                  data-service-name="Family care"
                 >
-                  <span class="service-list__index" aria-hidden="true">02</span>
-                  <span>Comfort visits</span>
-                  <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M14 7l5 5-5 5" /></svg>
+                  <span class="service-card__inner">
+                    <span class="service-card__face service-card__face--front" aria-hidden="false">
+                      <svg class="service-card__icon" aria-hidden="true" viewBox="0 0 48 48">
+                        <path d="M8 25c4-7 9-10 16-10s12 3 16 10M15 28c2 4 5 6 9 6s7-2 9-6M16 12c0-3 2-5 5-5M32 12c0-3-2-5-5-5" />
+                      </svg>
+                      <span class="service-card__eyebrow">Every chapter</span>
+                      <span class="service-card__title">Family care</span>
+                      <span class="service-card__summary">Checkups, hygiene and growing-smile support for every chapter.</span>
+                      <span class="service-card__action">Turn for details <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M14 7l5 5-5 5" /></svg></span>
+                    </span>
+                    <span class="service-card__face service-card__face--back" id="service-family-details" aria-hidden="true" inert>
+                      <span class="service-card__eyebrow">What this explores</span>
+                      <span class="service-card__title">Family care</span>
+                      <span class="service-card__summary">A calm, age-aware path that keeps prevention, home care and next steps easy to follow.</span>
+                      <span class="service-card__safeguard">Illustrative copy only. No provider or treatment is offered.</span>
+                      <span class="service-card__action">Return to overview <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H6M11 7l-5 5 5 5" /></svg></span>
+                    </span>
+                  </span>
                 </button>
-                <p class="service-list__mobile-detail">Sample copy emphasizes a slower pace, clear explanations, and frequent check-ins.</p>
-              </div>
-              <div class="service-list__item" role="listitem">
+              </li>
+              <li class="service-card">
+                <h3 class="visually-hidden">Comfort visits</h3>
                 <button
+                  class="service-card__button"
                   type="button"
                   aria-expanded="false"
-                  data-service="Restorative care"
-                  data-service-copy="Thoughtful repair plans built around function, comfort and longevity."
-                  data-service-detail="See why a repair is being discussed, what can wait and which alternatives exist."
+                  aria-controls="service-comfort-details"
+                  aria-label="Comfort visits: show details"
+                  data-service-card
+                  data-service-name="Comfort visits"
                 >
-                  <span class="service-list__index" aria-hidden="true">03</span>
-                  <span>Restorative care</span>
-                  <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M14 7l5 5-5 5" /></svg>
+                  <span class="service-card__inner">
+                    <span class="service-card__face service-card__face--front" aria-hidden="false">
+                      <svg class="service-card__icon" aria-hidden="true" viewBox="0 0 48 48">
+                        <path d="M24 39c-7-5-12-11-12-18 0-5 3-9 8-9 3 0 5 2 6 4 2-4 5-6 9-4 5 2 6 8 4 13-2 6-8 10-15 14Z" />
+                      </svg>
+                      <span class="service-card__eyebrow">Room to pause</span>
+                      <span class="service-card__title">Comfort visits</span>
+                      <span class="service-card__summary">A slower pace, clear explanations and room to pause.</span>
+                      <span class="service-card__action">Turn for details <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M14 7l5 5-5 5" /></svg></span>
+                    </span>
+                    <span class="service-card__face service-card__face--back" id="service-comfort-details" aria-hidden="true" inert>
+                      <span class="service-card__eyebrow">What this explores</span>
+                      <span class="service-card__title">Comfort visits</span>
+                      <span class="service-card__summary">This concept shows how preferences, check-ins and a no-pressure pace could be communicated.</span>
+                      <span class="service-card__safeguard">Illustrative copy only. No provider or treatment is offered.</span>
+                      <span class="service-card__action">Return to overview <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H6M11 7l-5 5 5 5" /></svg></span>
+                    </span>
+                  </span>
                 </button>
-                <p class="service-list__mobile-detail">See why a repair is being discussed, what can wait and which alternatives exist.</p>
-              </div>
-              <div class="service-list__item" role="listitem">
+              </li>
+              <li class="service-card">
+                <h3 class="visually-hidden">Restorative care</h3>
                 <button
+                  class="service-card__button"
                   type="button"
                   aria-expanded="false"
-                  data-service="Cosmetic planning"
-                  data-service-copy="Subtle options explored with previews before decisions."
-                  data-service-detail="Explore conservative changes with clear previews and realistic goals."
+                  aria-controls="service-restorative-details"
+                  aria-label="Restorative care: show details"
+                  data-service-card
+                  data-service-name="Restorative care"
                 >
-                  <span class="service-list__index" aria-hidden="true">04</span>
-                  <span>Cosmetic planning</span>
-                  <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M14 7l5 5-5 5" /></svg>
+                  <span class="service-card__inner">
+                    <span class="service-card__face service-card__face--front" aria-hidden="false">
+                      <svg class="service-card__icon" aria-hidden="true" viewBox="0 0 48 48">
+                        <path d="M15 9c3 0 5 2 9 2s6-2 9-2c5 0 8 4 7 9-1 6-4 9-5 15-1 5-3 7-6 7-2 0-3-2-5-7-2 5-3 7-5 7-3 0-5-2-6-7-1-6-4-9-5-15-1-5 2-9 7-9Z" />
+                      </svg>
+                      <span class="service-card__eyebrow">Clear tradeoffs</span>
+                      <span class="service-card__title">Restorative care</span>
+                      <span class="service-card__summary">Repair planning shaped around function, comfort and timing.</span>
+                      <span class="service-card__action">Turn for details <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M14 7l5 5-5 5" /></svg></span>
+                    </span>
+                    <span class="service-card__face service-card__face--back" id="service-restorative-details" aria-hidden="true" inert>
+                      <span class="service-card__eyebrow">What this explores</span>
+                      <span class="service-card__title">Restorative care</span>
+                      <span class="service-card__summary">Options, tradeoffs and what can wait are presented in plain language.</span>
+                      <span class="service-card__safeguard">Illustrative copy only. No provider or treatment is offered.</span>
+                      <span class="service-card__action">Return to overview <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H6M11 7l-5 5 5 5" /></svg></span>
+                    </span>
+                  </span>
                 </button>
-                <p class="service-list__mobile-detail">Explore conservative changes with clear previews and realistic goals.</p>
-              </div>
-              <div class="service-list__item" role="listitem">
+              </li>
+              <li class="service-card">
+                <h3 class="visually-hidden">Cosmetic planning</h3>
                 <button
+                  class="service-card__button"
                   type="button"
                   aria-expanded="false"
-                  data-service="Prevention planning"
-                  data-service-copy="A sample content path for explaining routine preventive choices."
-                  data-service-detail="Demonstrates how a practice website could explain recall choices and home-care resources."
+                  aria-controls="service-cosmetic-details"
+                  aria-label="Cosmetic planning: show details"
+                  data-service-card
+                  data-service-name="Cosmetic planning"
                 >
-                  <span class="service-list__index" aria-hidden="true">05</span>
-                  <span>Prevention planning</span>
-                  <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M14 7l5 5-5 5" /></svg>
+                  <span class="service-card__inner">
+                    <span class="service-card__face service-card__face--front" aria-hidden="false">
+                      <svg class="service-card__icon" aria-hidden="true" viewBox="0 0 48 48">
+                        <path d="m24 7 3 9 9 3-9 3-3 9-3-9-9-3 9-3 3-9ZM37 29l2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5Z" />
+                      </svg>
+                      <span class="service-card__eyebrow">Preview first</span>
+                      <span class="service-card__title">Cosmetic planning</span>
+                      <span class="service-card__summary">Subtle possibilities explored with previews before decisions.</span>
+                      <span class="service-card__action">Turn for details <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M14 7l5 5-5 5" /></svg></span>
+                    </span>
+                    <span class="service-card__face service-card__face--back" id="service-cosmetic-details" aria-hidden="true" inert>
+                      <span class="service-card__eyebrow">What this explores</span>
+                      <span class="service-card__title">Cosmetic planning</span>
+                      <span class="service-card__summary">Conservative goals and realistic tradeoffs are framed without representing outcomes.</span>
+                      <span class="service-card__safeguard">Illustrative copy only. No provider or treatment is offered.</span>
+                      <span class="service-card__action">Return to overview <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H6M11 7l-5 5 5 5" /></svg></span>
+                    </span>
+                  </span>
                 </button>
-                <p class="service-list__mobile-detail">Demonstrates how a practice website could explain recall choices and home-care resources.</p>
-              </div>
-            </div>
-
-            <div class="service-detail" id="service-detail">
-              <span aria-hidden="true">i</span>
-              <strong id="service-detail-title">Family care</strong>
-              <p id="service-detail-copy">Comfortable visits for every age, from first checkups to growth and beyond.</p>
-            </div>
+              </li>
+              <li class="service-card">
+                <h3 class="visually-hidden">Prevention planning</h3>
+                <button
+                  class="service-card__button"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="service-prevention-details"
+                  aria-label="Prevention planning: show details"
+                  data-service-card
+                  data-service-name="Prevention planning"
+                >
+                  <span class="service-card__inner">
+                    <span class="service-card__face service-card__face--front" aria-hidden="false">
+                      <svg class="service-card__icon" aria-hidden="true" viewBox="0 0 48 48">
+                        <path d="M24 40V18M24 29c-7 0-12-4-13-11 7 0 12 4 13 11Zm0-4c1-7 6-11 13-11-1 7-6 11-13 11Z" />
+                      </svg>
+                      <span class="service-card__eyebrow">Everyday clarity</span>
+                      <span class="service-card__title">Prevention planning</span>
+                      <span class="service-card__summary">Routine choices explained with a clear, practical next step.</span>
+                      <span class="service-card__action">Turn for details <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M14 7l5 5-5 5" /></svg></span>
+                    </span>
+                    <span class="service-card__face service-card__face--back" id="service-prevention-details" aria-hidden="true" inert>
+                      <span class="service-card__eyebrow">What this explores</span>
+                      <span class="service-card__title">Prevention planning</span>
+                      <span class="service-card__summary">Recall choices and home-care resources are organized without making clinical recommendations.</span>
+                      <span class="service-card__safeguard">Illustrative copy only. No provider or treatment is offered.</span>
+                      <span class="service-card__action">Return to overview <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H6M11 7l-5 5 5 5" /></svg></span>
+                    </span>
+                  </span>
+                </button>
+              </li>
+            </ul>
           </div>
         </div>
       </section>
@@ -368,7 +430,7 @@
                 />
               </div>
               <div class="case-card__body">
-                <p>Illustrative care story 01</p>
+                <p>Routine-care concept story</p>
                 <h3>A gentler return to routine care</h3>
                 <div class="case-card__pathway" role="list" aria-label="Listen, stabilize, maintain">
                   <span role="listitem">Listen</span><span role="listitem">Stabilize</span><span role="listitem">Maintain</span>
@@ -387,14 +449,14 @@
               <div class="case-card__media">
                 <img
                   src="assets/images/case-refresh.webp"
-                  alt="AI-generated concept still life of fictional hands comparing ceramic shade tabs beside a study model"
+                  alt="Fictional hands comparing ceramic shade tabs beside a study model"
                   width="1448"
                   height="1086"
                   loading="lazy"
                 />
               </div>
               <div class="case-card__body">
-                <p>Illustrative care story 02</p>
+                <p>Cosmetic-planning concept story</p>
                 <h3>Shaping a subtle smile refresh</h3>
                 <div class="case-card__pathway" role="list" aria-label="Explore, preview, refine">
                   <span role="listitem">Explore</span><span role="listitem">Preview</span><span role="listitem">Refine</span>
@@ -464,8 +526,158 @@
               height="1024"
               loading="lazy"
             />
-            <figcaption>AI-generated concept image · Fictional people · No real dentist, patient care, or treatment plan is shown.</figcaption>
+            <figcaption>Original concept image · Fictional people · No real dentist, patient care, or treatment plan is shown.</figcaption>
           </figure>
+        </div>
+      </section>
+
+      <section class="team section" id="team" aria-labelledby="team-title">
+        <div class="team__layout shell">
+          <div class="section-intro team__intro reveal">
+            <p class="section-label">Fictional team profiles</p>
+            <h2 id="team-title">Meet the people behind the feeling.</h2>
+            <span class="accent-rule" aria-hidden="true"></span>
+            <p>
+              A practice website can make its approach feel human before a visitor ever steps inside.
+            </p>
+            <p class="team__disclosure">
+              <strong>Concept Project profiles.</strong> All names, portraits, roles, and profile stories in this section are fictional. No real dental professionals are represented.
+            </p>
+          </div>
+
+          <div class="team__groups">
+            <section class="team-group reveal" aria-labelledby="dentists-title">
+              <div class="team-group__heading">
+                <p class="section-label">Care conversations</p>
+                <h3 id="dentists-title">Fictional dentist profiles</h3>
+              </div>
+              <ul class="team-grid team-grid--dentists">
+                <li class="profile-card profile-card--dentist">
+                  <figure class="profile-card__portrait">
+                    <img
+                      src="assets/images/team-mira.webp"
+                      alt="Warm editorial concept portrait for Mira, a fictional dentist profile"
+                      width="800"
+                      height="1000"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <figcaption>Original concept portrait <span aria-hidden="true">·</span> Fictional person</figcaption>
+                  </figure>
+                  <div class="profile-card__copy">
+                    <p class="profile-card__status">Fictional profile</p>
+                    <h4>Mira</h4>
+                    <p class="profile-card__role">Dentist</p>
+                    <p>Brings a calm, question-first pace to family and restorative conversations.</p>
+                  </div>
+                </li>
+                <li class="profile-card profile-card--dentist">
+                  <figure class="profile-card__portrait">
+                    <img
+                      src="assets/images/team-theo.webp"
+                      alt="Warm editorial concept portrait for Theo, a fictional dentist profile"
+                      width="800"
+                      height="1000"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <figcaption>Original concept portrait <span aria-hidden="true">·</span> Fictional person</figcaption>
+                  </figure>
+                  <div class="profile-card__copy">
+                    <p class="profile-card__status">Fictional profile</p>
+                    <h4>Theo</h4>
+                    <p class="profile-card__role">Dentist</p>
+                    <p>Makes complex choices easier to follow with plain language and visual planning.</p>
+                  </div>
+                </li>
+                <li class="profile-card profile-card--dentist">
+                  <figure class="profile-card__portrait">
+                    <img
+                      src="assets/images/team-lena.webp"
+                      alt="Warm editorial concept portrait for Lena, a fictional dentist profile"
+                      width="800"
+                      height="1000"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <figcaption>Original concept portrait <span aria-hidden="true">·</span> Fictional person</figcaption>
+                  </figure>
+                  <div class="profile-card__copy">
+                    <p class="profile-card__status">Fictional profile</p>
+                    <h4>Lena</h4>
+                    <p class="profile-card__role">Dentist</p>
+                    <p>Centers conservative options, realistic expectations and patient-led goals.</p>
+                  </div>
+                </li>
+              </ul>
+            </section>
+
+            <section class="team-group team-group--assistants reveal" aria-labelledby="assistants-title">
+              <div class="team-group__heading">
+                <p class="section-label">The steady handoff</p>
+                <h3 id="assistants-title">Fictional dental-assistant profiles</h3>
+              </div>
+              <ul class="team-grid team-grid--assistants">
+                <li class="profile-card profile-card--assistant">
+                  <figure class="profile-card__portrait">
+                    <img
+                      src="assets/images/team-ari.webp"
+                      alt="Warm editorial concept portrait for Ari, a fictional dental-assistant profile"
+                      width="800"
+                      height="1000"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <figcaption>Original concept portrait <span aria-hidden="true">·</span> Fictional person</figcaption>
+                  </figure>
+                  <div class="profile-card__copy">
+                    <p class="profile-card__status">Fictional profile</p>
+                    <h4>Ari</h4>
+                    <p class="profile-card__role">Dental assistant</p>
+                    <p>Helps every room feel prepared, settled and easy to navigate.</p>
+                  </div>
+                </li>
+                <li class="profile-card profile-card--assistant">
+                  <figure class="profile-card__portrait">
+                    <img
+                      src="assets/images/team-noor.webp"
+                      alt="Warm editorial concept portrait for Noor, a fictional dental-assistant profile"
+                      width="800"
+                      height="1000"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <figcaption>Original concept portrait <span aria-hidden="true">·</span> Fictional person</figcaption>
+                  </figure>
+                  <div class="profile-card__copy">
+                    <p class="profile-card__status">Fictional profile</p>
+                    <h4>Noor</h4>
+                    <p class="profile-card__role">Dental assistant</p>
+                    <p>Keeps comfort cues visible and questions welcome throughout the visit.</p>
+                  </div>
+                </li>
+                <li class="profile-card profile-card--assistant">
+                  <figure class="profile-card__portrait">
+                    <img
+                      src="assets/images/team-cam.webp"
+                      alt="Warm editorial concept portrait for Cam, a fictional dental-assistant profile"
+                      width="800"
+                      height="1000"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <figcaption>Original concept portrait <span aria-hidden="true">·</span> Fictional person</figcaption>
+                  </figure>
+                  <div class="profile-card__copy">
+                    <p class="profile-card__status">Fictional profile</p>
+                    <h4>Cam</h4>
+                    <p class="profile-card__role">Dental assistant</p>
+                    <p>Creates clear handoffs so the next step never feels like a surprise.</p>
+                  </div>
+                </li>
+              </ul>
+            </section>
+          </div>
         </div>
       </section>
 
@@ -534,17 +746,14 @@
 
           <div class="payment-steps reveal" role="group" aria-label="Illustrative payment communication steps">
             <button class="payment-step is-active" type="button" aria-pressed="true" data-payment-step="0">
-              <span>01</span>
               <strong>Understand</strong>
               <small>See the clinical why and what can wait.</small>
             </button>
             <button class="payment-step" type="button" aria-pressed="false" data-payment-step="1">
-              <span>02</span>
               <strong>Estimate</strong>
               <small>Review an illustrative cost and benefits outline.</small>
             </button>
             <button class="payment-step" type="button" aria-pressed="false" data-payment-step="2">
-              <span>03</span>
               <strong>Choose</strong>
               <small>Compare timing and payment paths without pressure.</small>
             </button>
@@ -555,7 +764,7 @@
               A clear interface starts with why care is being discussed, which parts are time-sensitive and which can wait.
             </p>
             <button class="text-link text-link--button" id="payment-flow-button" type="button">
-              See the demo estimate flow
+              See the estimate communication flow
               <svg aria-hidden="true" viewBox="0 0 24 24">
                 <path d="M5 12h13M14 7l5 5-5 5" />
               </svg>
@@ -576,7 +785,7 @@
               Choose a few preferences and this concept will show how a thoughtful request flow could respond.
             </p>
             <button class="button button--primary" type="button" data-open-booking>
-              Try the demo request
+              Try the request interaction
             </button>
             <p class="booking-cta__note">Nothing will be sent and no appointment will be created.</p>
           </div>
@@ -613,7 +822,7 @@
             <details>
               <summary>What happens when I submit the form?</summary>
               <p>
-                The interface displays a demo confirmation in your browser. It does not contact a practice, save your entries, or make an appointment.
+                The interface displays a concept confirmation in your browser. It does not contact a practice, save your entries, or make an appointment.
               </p>
             </details>
           </div>
@@ -634,6 +843,7 @@
         <nav aria-label="Footer navigation">
           <a href="#care">Care</a>
           <a href="#approach">Our approach</a>
+          <a href="#team">Team</a>
           <a href="#visit">Visit</a>
           <a href="#payment">Payment</a>
         </nav>
@@ -654,7 +864,7 @@
     </footer>
 
     <button class="mobile-booking-dock button button--primary" type="button" data-open-booking hidden>
-      Request a demo visit
+      Preview a visit request
     </button>
 
     <dialog class="dialog concept-dialog" id="concept-dialog" aria-labelledby="concept-dialog-title">
@@ -727,19 +937,19 @@
         <span>Not a real dental practice</span>
       </div>
       <div class="booking-dialog__shell">
-        <button class="dialog__close" type="button" data-close-booking aria-label="Close booking demo">
+        <button class="dialog__close" type="button" data-close-booking aria-label="Close booking preview">
           <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" /></svg>
         </button>
 
         <div class="booking-form-view" id="booking-form-view">
           <div class="booking-dialog__header">
             <p class="section-label">Portfolio interaction</p>
-            <h2 id="booking-dialog-title">Request a demo visit</h2>
+            <h2 id="booking-dialog-title">Preview a visit request</h2>
             <p>Explore how a clear booking request could respond without contacting a clinic.</p>
           </div>
 
           <div class="booking-dialog__notice" id="booking-dialog-description">
-            <strong>Demo only</strong>
+            <strong>Portfolio interaction only</strong>
             <span>No data leaves this page. No appointment is created. Use invented details only.</span>
           </div>
 
@@ -771,7 +981,7 @@
                   type="email"
                   inputmode="email"
                   autocomplete="off"
-                  placeholder="demo@example.invalid"
+                  placeholder="sample@example.invalid"
                   required
                   aria-describedby="booking-email-error"
                 />
@@ -785,7 +995,7 @@
                   type="tel"
                   inputmode="tel"
                   autocomplete="off"
-                  placeholder="555-0100"
+                  placeholder="(555) 123-4567"
                   aria-describedby="booking-phone-error"
                 />
                 <p class="form-field__error" id="booking-phone-error"></p>
@@ -844,7 +1054,7 @@
                   id="booking-preferences"
                   rows="3"
                   maxlength="280"
-                  placeholder="For this demo, use general preferences only—such as a quieter arrival or shorter appointment."
+                  placeholder="For this interaction, use general preferences only—such as a quieter arrival or shorter appointment."
                   aria-describedby="booking-preferences-help"
                 ></textarea>
                 <p class="form-field__help" id="booking-preferences-help">
@@ -861,14 +1071,14 @@
                 aria-describedby="booking-consent-error"
               />
               <label for="booking-consent">
-                I understand this is a portfolio demo and no request will be sent.
+                I understand this is a portfolio interaction and no request will be sent.
               </label>
               <p class="form-field__error" id="booking-consent-error"></p>
             </div>
 
             <div class="booking-form__footer">
               <button class="button button--primary" id="booking-submit" type="submit">
-                Complete demo request
+                Show sample response
               </button>
               <p>This prototype is not monitored. Use invented details only; never enter personal, health, insurance, or urgent-care information.</p>
             </div>
@@ -881,13 +1091,13 @@
             <path d="m19 33 9 9 18-21" />
           </svg>
           <p class="section-label">In-browser demonstration</p>
-          <h2>Your demo request is ready.</h2>
+          <h2>Your sample response is ready.</h2>
           <p>
             This is where a real practice could explain what happens next. For this concept, nothing was sent or saved.
           </p>
           <div class="booking-success__code">
-            <span>Confirmation code (demo only)</span>
-            <strong>DEMO / DAYMARK</strong>
+            <span>Confirmation code (concept only)</span>
+            <strong>CONCEPT / DAYMARK</strong>
             <small>This is not a booking number.</small>
           </div>
           <div class="booking-success__actions">

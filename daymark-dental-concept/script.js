@@ -213,26 +213,35 @@ window.addEventListener("resize", () => {
   updateMobileBookingDock();
 });
 
-const serviceTitle = $("#service-feature-title");
-const serviceCopy = $("#service-feature-copy");
-const serviceDetailTitle = $("#service-detail-title");
-const serviceDetailCopy = $("#service-detail-copy");
-const serviceBookingButton = $(".service-feature [data-open-booking]");
+$$("[data-service-card]").forEach((button) => {
+  const card = button.closest(".service-card");
+  const front = $(".service-card__face--front", button);
+  const back = $(".service-card__face--back", button);
+  const serviceName = button.dataset.serviceName;
 
-$$(".service-list__item button").forEach((button) => {
-  button.addEventListener("click", () => {
-    $$(".service-list__item").forEach((item) => {
-      const itemButton = $("button", item);
-      const selected = itemButton === button;
-      item.classList.toggle("is-selected", selected);
-      itemButton.setAttribute("aria-expanded", String(selected));
-    });
+  function setServiceCardState(expanded) {
+    card.classList.toggle("is-flipped", expanded);
+    button.setAttribute("aria-expanded", String(expanded));
+    button.setAttribute(
+      "aria-label",
+      `${serviceName}: ${expanded ? "show overview" : "show details"}`,
+    );
+    front.setAttribute("aria-hidden", String(expanded));
+    back.setAttribute("aria-hidden", String(!expanded));
+    front.toggleAttribute("inert", expanded);
+    back.toggleAttribute("inert", !expanded);
+  }
 
-    serviceTitle.textContent = button.dataset.service;
-    serviceCopy.textContent = button.dataset.serviceCopy;
-    serviceDetailTitle.textContent = button.dataset.service;
-    serviceDetailCopy.textContent = button.dataset.serviceDetail;
-    serviceBookingButton.dataset.bookingReason = button.dataset.service;
+  setServiceCardState(false);
+  const toggleServiceCard = () => {
+    setServiceCardState(button.getAttribute("aria-expanded") !== "true");
+  };
+
+  button.addEventListener("click", toggleServiceCard);
+  button.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    toggleServiceCard();
   });
 });
 
@@ -377,7 +386,7 @@ const fieldRules = {
     return input.value ? "" : "Choose a preferred time.";
   },
   "booking-consent"(input) {
-    return input.checked ? "" : "Confirm that you understand this is a portfolio demo.";
+    return input.checked ? "" : "Confirm that you understand this is a portfolio interaction.";
   },
 };
 
@@ -452,7 +461,7 @@ function resetBookingState({ focusName = false } = {}) {
   $("ul", errorSummary).replaceChildren();
   bookingSubmit.disabled = false;
   bookingSubmit.removeAttribute("aria-busy");
-  bookingSubmit.textContent = "Complete demo request";
+  bookingSubmit.textContent = "Show sample response";
   bookingFormView.hidden = false;
   bookingSuccess.hidden = true;
   bookingDialog.setAttribute("aria-labelledby", "booking-dialog-title");
@@ -473,7 +482,7 @@ bookingForm.addEventListener("submit", (event) => {
 
   bookingSubmit.disabled = true;
   bookingSubmit.setAttribute("aria-busy", "true");
-  bookingSubmit.textContent = "Preparing demo…";
+  bookingSubmit.textContent = "Preparing sample response…";
 
   const finish = () => {
     bookingForm.reset();
