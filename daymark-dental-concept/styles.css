@@ -741,16 +741,6 @@ p {
   color: color-mix(in srgb, var(--surface) 86%, transparent);
 }
 
-.service-card__safeguard {
-  display: block;
-  margin-top: 1rem;
-  padding-top: 0.85rem;
-  border-top: 1px solid var(--rule-dark);
-  color: color-mix(in srgb, var(--surface) 72%, transparent);
-  font-size: 0.76rem;
-  line-height: 1.45;
-}
-
 .service-card__action {
   display: inline-flex;
   align-items: center;
@@ -851,13 +841,6 @@ p {
 .case-card__pathway span:not(:last-child)::after {
   content: "·";
   margin-left: 0.55rem;
-}
-
-.case-card__note {
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--rule);
-  color: var(--ink-soft);
-  font-size: 0.88rem;
 }
 
 .case-rail__progress {
@@ -1047,18 +1030,6 @@ p {
 .profile-card--assistant .profile-card__portrait img {
   aspect-ratio: 4 / 3;
   object-position: center 24%;
-}
-
-.profile-card__portrait figcaption {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 0.55rem 0.75rem;
-  color: var(--surface);
-  background: rgb(24 54 47 / 0.9);
-  font-size: 0.74rem;
-  line-height: 1.35;
 }
 
 .profile-card__copy {
@@ -1329,85 +1300,6 @@ p {
 
 .booking-cta__note {
   font-size: 0.85rem !important;
-}
-
-.booking-cta aside {
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--rule-dark);
-}
-
-.booking-cta aside h3 {
-  margin-bottom: 1.25rem;
-}
-
-.booking-cta aside ul {
-  display: grid;
-  gap: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.booking-cta aside li {
-  padding: 1rem 0;
-  border-top: 1px solid var(--rule-dark);
-}
-
-.booking-cta aside li::before {
-  content: "—";
-  margin-right: 0.75rem;
-  color: var(--clay);
-}
-
-.concept-faq {
-  background: var(--surface);
-}
-
-.concept-faq__layout {
-  display: grid;
-  gap: 3rem;
-}
-
-.faq-list {
-  border-top: 1px solid var(--rule);
-}
-
-.faq-list details {
-  border-bottom: 1px solid var(--rule);
-}
-
-.faq-list summary {
-  position: relative;
-  display: flex;
-  min-height: 4.5rem;
-  align-items: center;
-  padding: 1rem 3rem 1rem 0;
-  font-size: 1.05rem;
-  font-weight: 600;
-  list-style: none;
-  cursor: pointer;
-}
-
-.faq-list summary::-webkit-details-marker {
-  display: none;
-}
-
-.faq-list summary::after {
-  content: "+";
-  position: absolute;
-  right: 0.25rem;
-  color: var(--clay-strong);
-  font-size: 1.5rem;
-  font-weight: 400;
-}
-
-.faq-list details[open] summary::after {
-  content: "−";
-}
-
-.faq-list details p {
-  max-width: 48rem;
-  padding: 0 2rem 1.4rem 0;
-  color: var(--ink-soft);
 }
 
 .site-footer {
@@ -1987,8 +1879,7 @@ p {
   }
 
   .approach__layout,
-  .visit__layout,
-  .concept-faq__layout {
+  .visit__layout {
     grid-template-columns: minmax(15rem, 0.78fr) minmax(0, 1.22fr);
     align-items: start;
     gap: clamp(3rem, 7vw, 7rem);
@@ -2012,19 +1903,6 @@ p {
 
   .payment__disclosure {
     grid-column: 2;
-  }
-
-  .booking-cta__layout {
-    grid-template-columns: minmax(0, 1.3fr) minmax(16rem, 0.7fr);
-    align-items: center;
-    gap: clamp(3rem, 8vw, 8rem);
-  }
-
-  .booking-cta aside {
-    padding-top: 0;
-    padding-left: 2rem;
-    border-top: 0;
-    border-left: 1px solid var(--rule-dark);
   }
 
   .site-footer__layout {
@@ -2242,10 +2120,6 @@ p {
     grid-column: 2;
     justify-self: end;
     text-align: right;
-  }
-
-  .concept-faq__layout {
-    grid-template-columns: minmax(15rem, 0.55fr) minmax(0, 1.45fr);
   }
 
   .site-footer__layout {

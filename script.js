@@ -348,32 +348,6 @@ const initializeMotion = () => {
     }, "-=0.56");
   }
 
-  gsap.utils.toArray(".image-scale").forEach((image) => {
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: image,
-        start: "top 92%",
-        end: "bottom 8%",
-        scrub: 0.65
-      }
-    })
-      .fromTo(image, {
-        scale: 0.9,
-        opacity: 0.38
-      }, {
-        scale: 1,
-        opacity: 1,
-        duration: 0.5,
-        ease: "none"
-      })
-      .to(image, {
-        scale: 1.025,
-        opacity: 0.35,
-        duration: 0.5,
-        ease: "none"
-      });
-  });
-
   const storyWords = gsap.utils.toArray(".story-line .word");
 
   if (storyWords.length) {

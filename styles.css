@@ -27,7 +27,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: 6rem;
   overflow-x: hidden;
   background: var(--ink);
@@ -605,7 +604,6 @@ button {
   border-radius: 0.25rem;
   background: var(--ink-soft);
   transition:
-    flex 750ms var(--ease-out),
     border-color 280ms ease,
     transform 500ms var(--ease-out);
 }
@@ -2618,7 +2616,7 @@ button {
 .work-accordion {
   display: grid;
   height: auto;
-  gap: clamp(4.5rem, 10vw, 8rem);
+  gap: clamp(3.5rem, 7vw, 6rem);
 }
 
 .work-card {
@@ -2648,7 +2646,7 @@ button {
 }
 
 .work-card-image {
-  aspect-ratio: auto;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border: 1px solid var(--line);
   background: #05070a;
@@ -2662,13 +2660,14 @@ button {
 .work-card-image img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   min-height: 0;
 }
 
 .work-card-image img,
 .work-card:hover .work-card-image img {
-  object-fit: contain;
+  object-fit: cover;
+  object-position: top center;
   transform: none;
 }
 
@@ -2814,12 +2813,22 @@ button {
 }
 
 .case-study-proof figcaption {
-  max-width: 65ch;
-  margin-top: 0.8rem;
+  max-width: none;
+  margin-top: 0;
+  padding: 0.8rem 1rem 0.9rem;
+  border: 1px solid var(--line);
+  border-top: 0;
+  background: var(--ink-soft);
   color: var(--muted);
   font-family: var(--mono);
-  font-size: 1rem;
-  line-height: 1.65;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 47.99rem) {
+  .work-card-image {
+    aspect-ratio: 4 / 5;
+  }
 }
 
 .service-scope {
@@ -3010,12 +3019,10 @@ button {
   .work-accordion {
     display: grid;
     height: auto;
-    gap: clamp(6rem, 10vw, 9rem);
+    gap: clamp(4rem, 6vw, 6rem);
   }
 
-  .work-card,
-  .work-card.is-active,
-  .work-card:hover {
+  .work-card {
     grid-template-columns: minmax(18rem, 0.72fr) minmax(0, 1.28fr);
     column-gap: clamp(3rem, 6vw, 6.5rem);
     row-gap: clamp(2.75rem, 5vw, 4.75rem);
@@ -3023,8 +3030,7 @@ button {
     padding-block: 2.5rem;
   }
 
-  .work-card-copy,
-  .work-card-image img {
+  .work-card-copy {
     min-height: 0;
     height: auto;
   }
@@ -3042,34 +3048,24 @@ button {
   }
 
   .case-study-brief {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .case-study-brief > div,
   .case-study-brief > div:last-child {
     grid-template-columns: 1fr;
-    grid-column: span 4;
+    grid-column: auto;
     padding: 1.6rem clamp(1.5rem, 2.5vw, 2.5rem);
     border-left: 1px solid var(--line);
   }
 
-  .case-study-brief > div:first-child,
-  .case-study-brief > div:nth-child(4) {
+  .case-study-brief > div:first-child {
     padding-left: 0;
     border-left: 0;
   }
 
-  .case-study-brief > div:nth-child(3),
   .case-study-brief > div:last-child {
     padding-right: 0;
-  }
-
-  .case-study-brief > div:nth-child(4) {
-    grid-column: span 7;
-  }
-
-  .case-study-brief > div:last-child {
-    grid-column: span 5;
   }
 
   .work-card:not(.is-active):not(:hover) .work-card-copy p {
