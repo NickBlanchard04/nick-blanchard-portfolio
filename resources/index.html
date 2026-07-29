@@ -30,9 +30,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://api.fontshare.com/v2/css?f%5B%5D=satoshi@400,500,600,700,900&amp;display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@1,6..72,500&amp;display=swap" rel="stylesheet">
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="any">
-  <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64">
-  <link rel="stylesheet" href="../styles.css?v=20260728-content-sprint-1">
+  <link rel="icon" href="/favicon.ico?v=20260728-logo-system-1" type="image/x-icon" sizes="16x16 32x32 48x48 64x64">
+  <link rel="icon" href="/assets/brand/bbb-favicon.svg" type="image/svg+xml" sizes="any">
+  <link rel="icon" href="/assets/brand/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/assets/brand/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="/assets/brand/favicon-48x48.png" type="image/png" sizes="48x48">
+  <link rel="icon" href="/assets/brand/favicon-64x64.png" type="image/png" sizes="64x64">
+  <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="../styles.css?v=20260728-logo-system-1">
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
@@ -59,7 +65,13 @@
           "publisher": {
             "@type": "Organization",
             "name": "Built by Blanch",
-            "url": "https://builtbyblanch.com/"
+            "url": "https://builtbyblanch.com/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://builtbyblanch.com/assets/brand/app-icon-512x512.png",
+              "width": 512,
+              "height": 512
+            }
           },
           "about": [
             "Local business websites",
@@ -96,8 +108,10 @@
 
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="../#top" aria-label="B Blanch web design home">
-        <span class="brand-glyph" aria-hidden="true"><b>B</b><i></i></span>
+      <a class="brand" href="../#top" aria-label="Built by Blanch home">
+        <span class="brand-glyph" aria-hidden="true">
+          <img class="brand-logo" src="/assets/brand/bbb-primary-detailed-reverse.svg" width="64" height="64" alt="">
+        </span>
         <span class="brand-lockup">
           <strong>Blanch</strong>
           <small>Web design</small>
@@ -266,8 +280,10 @@
   </main>
 
   <footer class="site-footer">
-    <a class="brand" href="../#top" aria-label="B Blanch web design home">
-      <span class="brand-glyph" aria-hidden="true"><b>B</b><i></i></span>
+    <a class="brand" href="../#top" aria-label="Built by Blanch home">
+      <span class="brand-glyph" aria-hidden="true">
+        <img class="brand-logo" src="/assets/brand/bbb-primary-detailed-reverse.svg" width="64" height="64" alt="" loading="lazy">
+      </span>
       <span class="brand-lockup">
         <strong>Blanch</strong>
         <small>Web design</small>

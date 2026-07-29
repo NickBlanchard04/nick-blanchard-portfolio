@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc" shape-rendering="geometricPrecision">
+  <title id="title">Built by Blanch detailed B monogram, reverse</title>
+  <desc id="desc">White geometric B with an internal muted steel-blue joinery detail.</desc>
+  
+  
+    <defs>
+      <mask id="detail-reverse-seams" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64">
+        <rect width="64" height="64" fill="white"/>
+        <path d="M8 6L18 15" fill="none" stroke="black" stroke-width="1.6" stroke-linecap="square"/>
+        <path d="M8 58L18 49" fill="none" stroke="black" stroke-width="1.6" stroke-linecap="square"/>
+        <path d="M32.7 33.7L42 40.7" fill="none" stroke="black" stroke-width="1.7" stroke-linecap="square"/>
+      </mask>
+    </defs>
+    <g mask="url(#detail-reverse-seams)">
+      <path d="M8 6H36 C48 6 55 13 55 23 C55 29 52 34 47 37 C53 39 57 44 57 51 C57 55 53 58 46 58 H8Z M18 14H35 C42 14 46 17 46 22 C46 27 42 30 36 30 H18Z M18 37H37 C44 37 48 40 48 44 C48 48 44 50 37 50 H18Z" fill="#F5F7F6" fill-rule="evenodd"/>
+      <path d="M20 23.5L33.1 33.5L25.4 39.3L20 35.8Z" fill="#F5F7F6"/>
+      <path d="M20 42.2L33 34.7L40.8 40L20 52Z" fill="#8FA7B3"/>
+    </g>
+</svg>

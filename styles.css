@@ -13,7 +13,7 @@
   --line-strong: rgba(241, 240, 234, 0.24);
   --page-pad: clamp(1rem, 3.4vw, 3.5rem);
   --page-max: 90rem;
-  --header-height: 5rem;
+  --header-height: 5.5rem;
   --display: "Satoshi", "Helvetica Neue", sans-serif;
   --serif: "Newsreader", Georgia, serif;
   --mono: "IBM Plex Mono", monospace;
@@ -155,9 +155,9 @@ button {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
   width: fit-content;
-  min-height: 2.75rem;
+  min-height: 4rem;
   text-transform: uppercase;
 }
 
@@ -1161,31 +1161,16 @@ button {
 }
 
 .brand-glyph {
-  position: relative;
-  display: grid;
-  width: 2.35rem;
+  display: block;
+  width: 4rem;
   aspect-ratio: 1;
   flex: 0 0 auto;
-  place-items: center;
-  overflow: hidden;
-  border: 1px solid var(--blue);
-  background: var(--blue);
-  color: #fff;
 }
 
-.brand-glyph b {
-  position: relative;
-  z-index: 1;
-  font-size: 0.95rem;
-  line-height: 1;
-}
-
-.brand-glyph i {
-  position: absolute;
-  width: 1.9rem;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.48);
-  transform: rotate(-45deg);
+.brand-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .brand-lockup {
@@ -2564,17 +2549,6 @@ button {
   );
   box-shadow: none;
   backdrop-filter: blur(14px);
-}
-
-.brand-glyph {
-  transition:
-    border-color 220ms ease,
-    transform 520ms var(--ease-out);
-}
-
-.brand:hover .brand-glyph {
-  border-color: var(--blue-light);
-  transform: rotate(-3deg);
 }
 
 .menu-toggle {

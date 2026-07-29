@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc" shape-rendering="geometricPrecision">
+  <title id="title">Built by Blanch favicon</title>
+  <desc id="desc">Simplified white B with a steel-blue joint on an opaque rounded charcoal tile.</desc>
+  <rect width="64" height="64" rx="8" fill="#111719"/>
+  
+    <path d="M8 8H36 L48 16V28L44 32 L52 40V48L44 56H8Z M20 16H32L40 20V24L36 28H20Z M20 36H36L44 40V44L36 48H20Z" fill="#F5F7F6" fill-rule="evenodd"/>
+    <path d="M36 28H44V36H36Z" fill="#8FA7B3"/>
+</svg>
