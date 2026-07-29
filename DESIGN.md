@@ -86,8 +86,9 @@ Typography:
 - Maximum content width around 90rem
 - Compact floating navigation on desktop
 - Asymmetric hero: copy left, layered real project imagery right
-- Exactly two selected projects, displayed deliberately rather than padded with
-  placeholders
+- Two live selected projects plus clearly disclosed, self-directed concept work;
+  every concept must remain visibly labeled as an industry demonstration and
+  never be presented as a client project
 - Three equal service columns
 - Four-step process rail
 - Concise split About section
@@ -117,12 +118,17 @@ Motion should guide attention and reinforce the drafting-table idea.
 
 ## Imagery
 
-Use only the supplied Green Wave Landscaping and Upstate Basketball League
-screenshots. Keep their natural colors so the projects remain authentic.
+Use the supplied Green Wave Landscaping and Upstate Basketball League
+screenshots for those live projects. Keep their natural colors so the projects
+remain authentic. Self-directed concept work may use its own original assets
+when the card, destination, metadata, and interactions all preserve an
+unmistakable concept / non-client disclosure.
 
 - Set explicit width and height attributes
 - Use `object-fit: cover` only when the crop is intentional
 - Keep mobile screenshots available for narrow compositions
+- Use actual rendered captures for portfolio concept cards rather than
+  flattening exploratory design frames into the destination
 - Do not add stock photography, fake office photos, fake team photos, or client
   logos
 

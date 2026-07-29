@@ -699,7 +699,8 @@ button {
 }
 
 .work-card-green::before,
-.work-card-ubl::before {
+.work-card-ubl::before,
+.work-card-pepper::before {
   position: absolute;
   z-index: 2;
   top: 0;
@@ -713,6 +714,10 @@ button {
 
 .work-card-ubl::before {
   background: #ec143b;
+}
+
+.work-card-pepper::before {
+  background: #ffd85a;
 }
 
 .work-card:hover::before,
@@ -2668,7 +2673,8 @@ button {
 }
 
 .work-card-green::before,
-.work-card-ubl::before {
+.work-card-ubl::before,
+.work-card-pepper::before {
   top: -1px;
   width: 3rem;
   height: 2px;
@@ -2679,6 +2685,51 @@ button {
 .work-card.is-active::before {
   width: clamp(5rem, 12vw, 9rem);
   height: 2px;
+}
+
+.work-card-pepper .work-card-top span:first-child,
+.work-card-pepper .case-study-brief dt {
+  color: #ffd85a;
+}
+
+.concept-project-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.8rem;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: clamp(2.25rem, 6vw, 3.5rem);
+  padding: 0.75rem 0;
+  border-top: 1px solid rgba(255, 216, 90, 0.58);
+  border-bottom: 1px solid rgba(255, 216, 90, 0.58);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.concept-project-status strong {
+  color: #ffd85a;
+  font: inherit;
+}
+
+.concept-project-status > * {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.concept-project-status > * + *::before {
+  margin-right: 0.8rem;
+  color: rgba(242, 239, 232, 0.5);
+  content: "·";
+}
+
+.work-card-pepper h3 {
+  margin-top: clamp(2.25rem, 6vw, 3.5rem);
 }
 
 .case-study-brief {
