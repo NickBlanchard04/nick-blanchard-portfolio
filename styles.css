@@ -699,7 +699,8 @@ button {
 .work-card-green::before,
 .work-card-ubl::before,
 .work-card-pepper::before,
-.work-card-daymark::before {
+.work-card-daymark::before,
+.work-card-lowglass::before {
   position: absolute;
   z-index: 2;
   top: 0;
@@ -721,6 +722,10 @@ button {
 
 .work-card-daymark::before {
   background: #d8755c;
+}
+
+.work-card-lowglass::before {
+  background: #c65e32;
 }
 
 .work-card:hover::before,
@@ -2679,7 +2684,8 @@ button {
 .work-card-green::before,
 .work-card-ubl::before,
 .work-card-pepper::before,
-.work-card-daymark::before {
+.work-card-daymark::before,
+.work-card-lowglass::before {
   top: -1px;
   width: 3rem;
   height: 2px;
@@ -2700,6 +2706,11 @@ button {
 .work-card-daymark .work-card-top span:first-child,
 .work-card-daymark .case-study-brief dt {
   color: #f0a28e;
+}
+
+.work-card-lowglass .work-card-top span:first-child,
+.work-card-lowglass .case-study-brief dt {
+  color: #f47d4d;
 }
 
 .concept-project-status {
@@ -2734,6 +2745,14 @@ button {
   color: #f0a28e;
 }
 
+.work-card-lowglass .concept-project-status {
+  border-color: rgba(244, 125, 77, 0.62);
+}
+
+.work-card-lowglass .concept-project-status strong {
+  color: #f47d4d;
+}
+
 .concept-project-status > * {
   display: inline-flex;
   align-items: center;
@@ -2747,7 +2766,8 @@ button {
 }
 
 .work-card-pepper h3,
-.work-card-daymark h3 {
+.work-card-daymark h3,
+.work-card-lowglass h3 {
   margin-top: clamp(2.25rem, 6vw, 3.5rem);
 }
 
