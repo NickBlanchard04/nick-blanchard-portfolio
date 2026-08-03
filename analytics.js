@@ -14,14 +14,18 @@
     "portfolio_project_view",
     "portfolio_project_click",
     "pricing_cta_click",
-    "contact_intent"
+    "contact_intent",
+    "booking_section_view",
+    "booking_inquiry_prepared"
   ]);
   const allowedParameters = new Set([
     "project_id",
     "project_name",
     "plan_name",
     "contact_method",
-    "placement"
+    "placement",
+    "preferred_date",
+    "preferred_time"
   ]);
 
   const sanitizeParameters = (parameters = {}) => Object.fromEntries(

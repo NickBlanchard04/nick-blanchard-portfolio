@@ -1,0 +1,27 @@
+# Built by Blanch
+
+Built by Blanch is an independent web design and development studio operated by Nick Blanchard. It creates clear, custom, mobile-friendly websites for local businesses, professional practices, community organizations, shops, and restaurants.
+
+Service areas include Saratoga Springs, Glens Falls, Lake George, and nearby communities in New York. Built by Blanch works remotely with businesses outside those areas when the project is a good fit.
+
+Core services:
+- Website strategy, information architecture, and conversion-focused page planning
+- Custom responsive web design and frontend development
+- Website rebuilds and focused improvements to existing sites
+- Technical launch preparation, metadata, structured data, sitemaps, and indexing setup
+- Optional website care and content updates after launch
+
+Canonical pages:
+- Home: https://builtbyblanch.com/
+- About: https://builtbyblanch.com/about/
+- Work: https://builtbyblanch.com/examples/
+- Web design service: https://builtbyblanch.com/web-design/
+- Start a project: https://builtbyblanch.com/start/
+
+Selected live work:
+- Mr. Backsplash: https://mrbacksplash.info/
+- Upstate Basketball League: https://upstatebasketballleague.com/
+
+Portfolio items explicitly labeled as concepts are fictional industry studies, not client engagements.
+
+Contact: nickblanchardbusiness@gmail.com

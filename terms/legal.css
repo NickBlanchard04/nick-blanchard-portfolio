@@ -1,0 +1,181 @@
+.legal-page {
+  min-height: 100%;
+  background: #ffffff;
+  color: #070707;
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.legal-page .site-header,
+.legal-page .site-footer {
+  color: #ffffff;
+  font-family: inherit;
+}
+
+.legal-main {
+  min-height: 100vh;
+  padding-block: 6rem;
+  background: #ffffff;
+}
+
+.legal-document {
+  width: min(100%, 72rem);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+.legal-copy {
+  width: min(100%, 48rem);
+  margin-inline: auto;
+}
+
+.legal-copy h1,
+.legal-copy h2 {
+  color: #070707;
+  letter-spacing: -0.025em;
+}
+
+.legal-copy h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 2.5rem;
+}
+
+.legal-copy h2 {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 2rem;
+}
+
+.legal-updated {
+  margin: 0 !important;
+  color: #626262;
+}
+
+.legal-intro {
+  margin-top: 2rem !important;
+}
+
+.refund-page .legal-intro {
+  margin-top: 1.5rem !important;
+}
+
+.legal-section {
+  margin-top: 2.5rem;
+}
+
+.legal-updated + .legal-section {
+  margin-top: 2rem;
+}
+
+@media (min-width: 48rem) {
+  .privacy-page .legal-intro + .legal-section {
+    margin-top: 3.5rem;
+  }
+
+  .refund-page [aria-labelledby="refund-review"] {
+    padding-bottom: 2rem;
+  }
+}
+
+.legal-copy p,
+.legal-copy li {
+  color: #626262;
+}
+
+.legal-copy p {
+  margin: 0 0 1rem;
+}
+
+.legal-copy p:last-child,
+.legal-copy ul:last-child {
+  margin-bottom: 0;
+}
+
+.legal-copy ul {
+  margin: 0 0 1rem;
+  padding-left: 1.5rem;
+}
+
+.legal-copy li {
+  padding-left: 0.1rem;
+}
+
+.legal-copy li + li {
+  margin-top: 0.15rem;
+}
+
+.legal-copy strong {
+  color: #343434;
+  font-weight: 700;
+}
+
+.legal-copy a {
+  color: #38456f;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.legal-copy a:hover {
+  text-decoration: underline;
+}
+
+.legal-page .footer-inner nav {
+  flex-wrap: wrap;
+}
+
+.legal-alias {
+  display: grid;
+  min-height: calc(100vh - 4.5rem);
+  place-items: center;
+  padding: 6rem 1rem;
+  background: #ffffff;
+  text-align: center;
+}
+
+.legal-alias > div {
+  max-width: 36rem;
+}
+
+.legal-alias h1 {
+  margin: 0 0 1rem;
+  color: #070707;
+  font-size: clamp(2.25rem, 7vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.legal-alias p {
+  margin: 0 auto 1.5rem;
+  color: #626262;
+}
+
+.legal-alias a {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1rem;
+  border-radius: 0.45rem;
+  background: #030712;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+@media (max-width: 47.99rem) {
+  .privacy-page .legal-intro {
+    margin-top: 1.5rem !important;
+  }
+
+  .legal-main {
+    padding-block: 6rem;
+  }
+
+  .legal-page .footer-inner nav {
+    row-gap: 0.85rem;
+  }
+}

@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /design-reference/
+Disallow: /mr-backsplash/
 
 Sitemap: https://builtbyblanch.com/sitemap.xml
