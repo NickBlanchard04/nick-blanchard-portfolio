@@ -408,8 +408,9 @@ img[src$="bbb-metallic-b.png"] {
 
 .build-stage {
   position: relative;
-  aspect-ratio: 1.72 / 1;
+  aspect-ratio: 1265 / 710;
   overflow: hidden;
+  background: #050912;
 }
 
 .build-preview {
@@ -432,6 +433,55 @@ img[src$="bbb-metallic-b.png"] {
   transform: scale(1);
 }
 
+.build-demo-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0;
+  filter: saturate(0.5) brightness(0.65);
+  transform: scale(1.04);
+  transform-origin: center;
+  transition:
+    opacity 800ms ease,
+    filter 800ms ease,
+    transform 1200ms var(--ease);
+}
+
+.build-demo-viewport {
+  width: 1265px;
+  height: 710px;
+  transform: scale(var(--build-demo-scale, 0.4));
+  transform-origin: top left;
+}
+
+.build-demo-frame {
+  display: block;
+  width: 1265px;
+  height: 710px;
+  border: 0;
+  background: #f5f3ed;
+  pointer-events: none;
+}
+
+.build-window.is-demo-ready .build-preview {
+  opacity: 0;
+}
+
+.build-window.is-demo-ready .build-demo-layer {
+  opacity: 0.11;
+}
+
+.build-window.is-complete.is-demo-ready .build-demo-layer {
+  opacity: 0.82;
+  filter: saturate(0.94) brightness(0.82);
+  transform: scale(1);
+}
+
+.build-window.is-complete.is-demo-ready.is-demoing .build-demo-layer {
+  opacity: 1;
+  filter: none;
+}
+
 .build-overlay {
   position: absolute;
   inset: 0;
@@ -446,6 +496,12 @@ img[src$="bbb-metallic-b.png"] {
 
 .build-window.is-complete .build-overlay {
   opacity: 0.25;
+}
+
+.build-window.is-demoing .build-overlay {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .build-label {
@@ -667,7 +723,7 @@ img[src$="bbb-metallic-b.png"] {
 }
 
 .work-wall.is-looping .work-column-track {
-  animation: work-marquee-vertical 35s linear infinite;
+  animation: work-marquee-vertical 20s linear infinite;
 }
 
 .work-wall.is-looping .work-column:nth-child(2) .work-column-track {
@@ -713,6 +769,7 @@ img[src$="bbb-metallic-b.png"] {
   border: 1px solid var(--line-strong);
   border-radius: 0.85rem;
   background: var(--ink-raised);
+  box-shadow: 0 1.1rem 2.8rem rgba(0, 0, 0, 0.2);
   transition:
     transform 650ms var(--ease),
     border-color 220ms ease,
@@ -759,20 +816,21 @@ img[src$="bbb-metallic-b.png"] {
   width: 100%;
   object-fit: cover;
   object-position: top center;
-  filter: brightness(0.72) saturate(0.88);
-  transform: scale(1.01);
+  filter: brightness(0.94) saturate(1.02) contrast(1.03);
+  transform: scale(1);
   transition:
     transform 800ms var(--ease),
     filter 450ms ease;
 }
 
 .project-card:hover > img {
-  filter: brightness(0.9) saturate(1);
-  transform: scale(1.045);
+  filter: brightness(1) saturate(1.06) contrast(1.02);
+  transform: scale(1.025);
 }
 
 .work-wall .project-card > img {
-  height: 17.5rem;
+  height: auto;
+  aspect-ratio: 16 / 10;
 }
 
 .project-meta {
@@ -1229,7 +1287,7 @@ img[src$="bbb-metallic-b.png"] {
   }
 
   .build-stage {
-    aspect-ratio: 1.5 / 1;
+    aspect-ratio: 1265 / 710;
   }
 
   .build-overlay {
@@ -1343,7 +1401,8 @@ img[src$="bbb-metallic-b.png"] {
   }
 
   .work-wall .project-card > img {
-    height: 9.6rem;
+    height: auto;
+    aspect-ratio: 16 / 10;
   }
 
   .project-meta {

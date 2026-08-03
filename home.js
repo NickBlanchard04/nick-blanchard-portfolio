@@ -8,6 +8,8 @@ const buildWindow = document.querySelector("[data-build-window]");
 const buildStatus = document.querySelector("[data-build-status]");
 const progressBar = document.querySelector("[data-progress-bar]");
 const progressValue = document.querySelector("[data-progress-value]");
+const buildStage = document.querySelector("[data-build-stage]");
+const buildDemoFrame = document.querySelector("[data-build-demo-frame]");
 
 const setMenuState = (open) => {
   if (!menuButton || !menuLabel || !mobileMenu) return;
@@ -56,6 +58,158 @@ const buildSteps = [
   { value: 100, text: "Ready to launch." }
 ];
 
+const buildDemoViewportWidth = 1265;
+const buildDemoTiming = {
+  topHold: 750,
+  scrollDown: 14000,
+  bottomHold: 1100,
+  returnToTop: 3200,
+  resetHold: 750
+};
+const buildDemoCycleDuration = Object.values(buildDemoTiming).reduce((total, duration) => total + duration, 0);
+
+let buildFinished = false;
+let buildDemoStartAllowed = false;
+let buildDemoFrameReady = false;
+let buildDemoVisible = true;
+let buildDemoAnimationFrame = 0;
+let buildDemoCycleStartedAt = 0;
+
+const setBuildDemoScroll = (scrollTop) => {
+  if (!buildDemoFrame?.contentWindow) return;
+
+  try {
+    const frameDocument = buildDemoFrame.contentWindow.document;
+    frameDocument.documentElement.scrollTop = scrollTop;
+    frameDocument.body.scrollTop = scrollTop;
+  } catch {
+    // The static screenshot stays visible if the same-origin preview is unavailable.
+  }
+};
+
+const getBuildDemoMaxScroll = () => {
+  if (!buildDemoFrame?.contentWindow) return 0;
+
+  try {
+    const frameWindow = buildDemoFrame.contentWindow;
+    const frameDocument = frameWindow.document;
+    const pageHeight = Math.max(
+      frameDocument.documentElement.scrollHeight,
+      frameDocument.body.scrollHeight
+    );
+    return Math.max(pageHeight - frameWindow.innerHeight, 0);
+  } catch {
+    return 0;
+  }
+};
+
+const stopBuildDemo = () => {
+  window.cancelAnimationFrame(buildDemoAnimationFrame);
+  buildDemoAnimationFrame = 0;
+  buildDemoCycleStartedAt = 0;
+};
+
+const renderBuildDemo = (timestamp) => {
+  if (!buildDemoFrameReady || !buildDemoVisible || document.hidden) {
+    stopBuildDemo();
+    return;
+  }
+
+  if (!buildDemoCycleStartedAt) buildDemoCycleStartedAt = timestamp;
+
+  const maxScroll = getBuildDemoMaxScroll();
+  const cycleTime = (timestamp - buildDemoCycleStartedAt) % buildDemoCycleDuration;
+  const downStart = buildDemoTiming.topHold;
+  const bottomStart = downStart + buildDemoTiming.scrollDown;
+  const returnStart = bottomStart + buildDemoTiming.bottomHold;
+  const resetStart = returnStart + buildDemoTiming.returnToTop;
+  let scrollTop = 0;
+
+  if (cycleTime < downStart) {
+    scrollTop = 0;
+  } else if (cycleTime < bottomStart) {
+    const progress = (cycleTime - downStart) / buildDemoTiming.scrollDown;
+    const easedProgress = -(Math.cos(Math.PI * progress) - 1) / 2;
+    scrollTop = maxScroll * easedProgress;
+  } else if (cycleTime < returnStart) {
+    scrollTop = maxScroll;
+  } else if (cycleTime < resetStart) {
+    const progress = (cycleTime - returnStart) / buildDemoTiming.returnToTop;
+    const easedProgress = 1 - Math.pow(1 - progress, 3);
+    scrollTop = maxScroll * (1 - easedProgress);
+  }
+
+  setBuildDemoScroll(scrollTop);
+  buildWindow.dataset.demoProgress = String(maxScroll ? Math.round((scrollTop / maxScroll) * 100) : 0);
+  buildDemoAnimationFrame = window.requestAnimationFrame(renderBuildDemo);
+};
+
+const startBuildDemo = () => {
+  if (
+    reducedMotion ||
+    !buildWindow ||
+    !buildFinished ||
+    !buildDemoStartAllowed ||
+    !buildDemoFrameReady ||
+    !buildDemoVisible ||
+    document.hidden ||
+    buildDemoAnimationFrame
+  ) return;
+
+  setBuildDemoScroll(0);
+  buildDemoCycleStartedAt = 0;
+  buildWindow.classList.add("is-demoing");
+  buildWindow.setAttribute("aria-label", "Scrolling preview of the Mr. Backsplash website");
+  buildDemoAnimationFrame = window.requestAnimationFrame(renderBuildDemo);
+};
+
+if (buildStage) {
+  const updateBuildDemoScale = () => {
+    buildStage.style.setProperty("--build-demo-scale", String(buildStage.clientWidth / buildDemoViewportWidth));
+  };
+
+  updateBuildDemoScale();
+  if ("ResizeObserver" in window) new ResizeObserver(updateBuildDemoScale).observe(buildStage);
+  else window.addEventListener("resize", updateBuildDemoScale);
+}
+
+if (buildWindow && "IntersectionObserver" in window) {
+  new IntersectionObserver(([entry]) => {
+    buildDemoVisible = entry.isIntersecting;
+    if (buildDemoVisible) startBuildDemo();
+    else stopBuildDemo();
+  }, { threshold: 0.15 }).observe(buildWindow);
+}
+
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) stopBuildDemo();
+  else startBuildDemo();
+});
+
+if (buildDemoFrame && !reducedMotion && !navigator.connection?.saveData) {
+  buildDemoFrame.addEventListener("load", () => {
+    buildDemoFrameReady = true;
+    buildWindow?.classList.add("is-demo-ready");
+    setBuildDemoScroll(0);
+    startBuildDemo();
+  }, { once: true });
+
+  fetch(buildDemoFrame.dataset.src, { credentials: "same-origin" })
+    .then((response) => {
+      if (!response.ok) throw new Error("Preview unavailable");
+      return response.text();
+    })
+    .then((markup) => {
+      const staticPreview = markup
+        .replace(/<script\s+type="module"[^>]*><\/script>/i, "")
+        .replace("</head>", "<style>html{scroll-behavior:auto!important}body{pointer-events:none}</style></head>");
+      buildDemoFrame.srcdoc = staticPreview;
+    })
+    .catch(() => {
+      buildWindow?.setAttribute("data-demo-fallback", "true");
+    });
+}
+
 if (buildWindow && buildStatus && progressBar && progressValue) {
   if (reducedMotion) {
     const finalStep = buildSteps.at(-1);
@@ -63,17 +217,31 @@ if (buildWindow && buildStatus && progressBar && progressValue) {
     progressValue.textContent = `${finalStep.value}%`;
     buildStatus.textContent = finalStep.text;
     buildWindow.classList.add("is-complete");
+    buildFinished = true;
   } else {
     let buildStepIndex = 0;
 
-    window.setInterval(() => {
-      buildStepIndex = (buildStepIndex + 1) % buildSteps.length;
+    const advanceBuild = () => {
+      buildStepIndex += 1;
       const step = buildSteps[buildStepIndex];
       progressBar.style.width = `${step.value}%`;
       progressValue.textContent = `${step.value}%`;
       buildStatus.textContent = step.text;
       buildWindow.classList.toggle("is-complete", step.value === 100);
-    }, 1800);
+
+      if (step.value === 100) {
+        buildFinished = true;
+        window.setTimeout(() => {
+          buildDemoStartAllowed = true;
+          startBuildDemo();
+        }, 900);
+        return;
+      }
+
+      window.setTimeout(advanceBuild, 1250);
+    };
+
+    window.setTimeout(advanceBuild, 1250);
   }
 }
 

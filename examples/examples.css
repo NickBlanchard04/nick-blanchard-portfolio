@@ -135,6 +135,13 @@
     box-shadow 320ms var(--ease);
 }
 
+.work-card:hover,
+.work-card:focus-visible {
+  border-color: rgba(167, 139, 250, 0.4);
+  transform: translateY(-6px);
+  box-shadow: 0 1.5rem 3.5rem rgba(0, 0, 0, 0.26);
+}
+
 .browser-bar {
   display: flex;
   min-height: 38px;
@@ -190,7 +197,16 @@
   aspect-ratio: 16 / 10;
   flex: 0 0 auto;
   overflow: hidden;
+  border-block: 1px solid rgba(255, 255, 255, 0.055);
   background: #111827;
+}
+
+.card-visual::after {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+  content: "";
+  pointer-events: none;
 }
 
 .card-visual img {
@@ -198,7 +214,17 @@
   height: 100%;
   object-fit: cover;
   object-position: center top;
-  transition: transform 700ms var(--ease);
+  filter: brightness(0.96) saturate(1.02) contrast(1.025);
+  transform: scale(1.005);
+  transition:
+    filter 320ms ease,
+    transform 700ms var(--ease);
+}
+
+.work-card:hover .card-visual img,
+.work-card:focus-visible .card-visual img {
+  filter: brightness(1) saturate(1.06) contrast(1.02);
+  transform: scale(1.025);
 }
 
 .card-copy {
