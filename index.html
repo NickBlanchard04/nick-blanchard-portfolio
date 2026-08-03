@@ -15,7 +15,7 @@
   <meta property="og:url" content="https://builtbyblanch.com/">
   <meta property="og:image" content="https://builtbyblanch.com/assets/mr-backsplash-desktop.png">
   <meta property="og:image:width" content="1265">
-  <meta property="og:image:height" content="710">
+  <meta property="og:image:height" content="712">
   <meta property="og:image:alt" content="Mr. Backsplash website designed by Built by Blanch">
 
   <meta name="twitter:card" content="summary_large_image">
@@ -31,12 +31,12 @@
   <link rel="icon" href="/favicon-16x16.png?v=20260802" type="image/png" sizes="16x16">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260802" sizes="180x180">
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="stylesheet" href="rabbit.css?v=20260803-showcase-1">
+  <link rel="stylesheet" href="rabbit.css?v=20260803-accessibility-1">
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
   <script src="analytics.js?v=20260802-launch-1" defer></script>
-  <script src="home.js?v=20260803-showcase-1" defer></script>
+  <script src="home.js?v=20260803-accessibility-1" defer></script>
 
   <script type="application/ld+json">
     {
@@ -52,22 +52,22 @@
           "sameAs": ["https://www.instagram.com/nickblanchard04/"]
         },
         {
-          "@type": "ProfessionalService",
+          "@type": "Organization",
           "@id": "https://builtbyblanch.com/#studio",
           "name": "Built by Blanch",
           "url": "https://builtbyblanch.com/",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://builtbyblanch.com/assets/brand/bbb-favicon-master.png",
-            "width": 1254,
-            "height": 1254
+            "url": "https://builtbyblanch.com/assets/brand/bbb-schema-logo-512.png",
+            "width": 512,
+            "height": 512
           },
           "image": "https://builtbyblanch.com/assets/mr-backsplash-desktop.png",
           "description": "Independent web design and development for local businesses, practices, and community organizations in Saratoga Springs, Glens Falls, Lake George, and nearby New York communities.",
           "email": "nickblanchardbusiness@gmail.com",
           "telephone": "+1-518-577-5167",
           "founder": {"@id": "https://builtbyblanch.com/#nick"},
-          "serviceType": ["Web design", "Frontend web development", "Website redesign", "Technical SEO setup", "Website care"],
+          "knowsAbout": ["Web design", "Frontend web development", "Website redesign", "Technical SEO setup", "Website care"],
           "areaServed": [
             {"@type": "City", "name": "Saratoga Springs", "containedInPlace": {"@type": "State", "name": "New York"}},
             {"@type": "City", "name": "Glens Falls", "containedInPlace": {"@type": "State", "name": "New York"}},
@@ -105,7 +105,7 @@
           "@id": "https://builtbyblanch.com/#faq",
           "mainEntity": [
             {"@type": "Question", "name": "How does the process start?", "acceptedAnswer": {"@type": "Answer", "text": "Start with a short inquiry. I learn about your business, your goals, and what the website should help people do. Then I outline the next step."}},
-            {"@type": "Question", "name": "What happens on the call?", "acceptedAnswer": {"@type": "Answer", "text": "We discuss your business, audience, current site, goals, and timing. You leave with a clear direction and no pressure to decide on the spot."}},
+            {"@type": "Question", "name": "What happens on the call?", "acceptedAnswer": {"@type": "Answer", "text": "I ask about your business, audience, current site, goals, and timing. You leave with a clear direction and no pressure to decide on the spot."}},
             {"@type": "Question", "name": "Do you only build the site, or manage it too?", "acceptedAnswer": {"@type": "Answer", "text": "I can build the site as a focused project with a clean handoff, then provide optional ongoing care if you want help keeping it current."}},
             {"@type": "Question", "name": "How do you help with SEO and AI search visibility?", "acceptedAnswer": {"@type": "Answer", "text": "I set up clear page structure, metadata, sitemap support, performance basics, and useful content. That helps discovery systems understand the site; it does not guarantee rankings."}},
             {"@type": "Question", "name": "How fast can a site go live?", "acceptedAnswer": {"@type": "Answer", "text": "Timing depends on the number of pages, the features involved, and how quickly the content is ready. I confirm a realistic schedule with you before the project starts."}},
@@ -125,7 +125,7 @@
   <header class="site-header" data-site-header>
     <div class="header-inner">
       <a class="brand" href="./" aria-label="Built by Blanch home">
-        <img src="assets/brand/bbb-metallic-b.png" width="34" height="34" alt="">
+        <img src="assets/brand/bbb-metallic-b-256.png" width="34" height="34" alt="">
         <span>Built by Blanch</span>
       </a>
 
@@ -158,7 +158,7 @@
 
           <div class="hero-wordmark">
             <h1 id="hero-title">Built by Blanch</h1>
-            <img src="assets/brand/bbb-metallic-b.png" width="88" height="88" alt="" aria-hidden="true">
+            <img src="assets/brand/bbb-metallic-b-256.png" width="88" height="88" alt="" aria-hidden="true">
           </div>
 
           <p class="hero-intro">Clear, custom websites for local businesses in Saratoga Springs, Glens Falls, Lake George, and nearby New York communities.</p>
@@ -179,13 +179,14 @@
           <div class="browser-bar">
             <span class="browser-lights" aria-hidden="true"><i></i><i></i><i></i></span>
             <span>mrbacksplash.info</span>
+            <button class="preview-motion-toggle" type="button" data-build-demo-toggle aria-controls="featured-site-preview" aria-pressed="false" aria-label="Pause featured website preview" hidden>Pause</button>
           </div>
 
           <div class="build-stage" data-build-stage>
             <img class="build-preview" src="assets/mr-backsplash-desktop.png" width="1265" height="712" alt="Mr. Backsplash website preview">
-            <div class="build-demo-layer" data-build-demo-layer aria-hidden="true">
+            <div class="build-demo-layer" id="featured-site-preview" data-build-demo-layer aria-hidden="true">
               <div class="build-demo-viewport">
-                <iframe class="build-demo-frame" data-build-demo-frame data-src="mr-backsplash/" title="Animated preview of the Mr. Backsplash website" tabindex="-1" allow="autoplay"></iframe>
+                <iframe class="build-demo-frame" data-build-demo-frame data-src="mr-backsplash/" title="Animated preview of the Mr. Backsplash website" tabindex="-1" sandbox="allow-same-origin"></iframe>
               </div>
             </div>
             <div class="build-overlay">
@@ -209,17 +210,17 @@
         <li>
           <span>1</span>
           <h3>Book a Call</h3>
-          <p>We start with a short call to learn about your business, your goals, and what a stronger website should do for you.</p>
+          <p>I start with a short call to learn about your business, your goals, and what a stronger website should do for you.</p>
         </li>
         <li>
           <span>2</span>
-          <h3>We Build Your Site</h3>
+          <h3>I Build Your Site</h3>
           <p>I build a professional, conversion-focused website tailored to your brand, industry, and market.</p>
         </li>
         <li>
           <span>3</span>
           <h3>Ongoing Management</h3>
-          <p>We manage and update your site as your business grows, keeping it optimized as search and AI continue to evolve.</p>
+          <p>I can manage and update your site as your business grows, keeping it optimized as search and AI continue to evolve.</p>
         </li>
       </ol>
     </section>
@@ -230,9 +231,10 @@
         <h2 id="work-title">Real builds and clearly labeled concept work.</h2>
         <span>Every piece below was designed and built by Built by Blanch.</span>
         <a href="examples/">See all work <span aria-hidden="true">&rarr;</span></a>
+        <button class="work-motion-toggle" type="button" data-work-motion-toggle aria-controls="homepage-work-showcase" aria-pressed="false" hidden>Pause portfolio</button>
       </div>
 
-      <div class="work-wall" data-work-wall aria-label="Moving selection of Built by Blanch projects">
+      <div class="work-wall" id="homepage-work-showcase" data-work-wall aria-label="Moving selection of Built by Blanch projects">
         <div class="work-column" data-work-column>
           <div class="work-column-track">
             <div class="work-sequence" data-work-sequence>
@@ -303,7 +305,7 @@
         </details>
         <details>
           <summary>What happens on the call?</summary>
-          <p>We discuss your business, audience, current site, goals, and timing. You leave with a clear direction and no pressure to decide on the spot.</p>
+          <p>I ask about your business, audience, current site, goals, and timing. You leave with a clear direction and no pressure to decide on the spot.</p>
         </details>
         <details>
           <summary>Do you only build the site, or manage it too?</summary>
@@ -347,7 +349,7 @@
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <img src="assets/brand/bbb-metallic-b.png" width="42" height="42" alt="">
+        <img src="assets/brand/bbb-metallic-b-256.png" width="42" height="42" alt="" loading="lazy" decoding="async">
         <span><strong>Built by Blanch</strong><small>Websites made clear.</small></span>
       </div>
 

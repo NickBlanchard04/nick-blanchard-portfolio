@@ -73,7 +73,7 @@ picture {
   max-width: 100%;
 }
 
-img[src$="bbb-metallic-b.png"] {
+img[src*="bbb-metallic-b-"] {
   clip-path: inset(22% round 0.18rem);
   transform: scale(1.7);
   transform-origin: center;

@@ -10,6 +10,8 @@ const progressBar = document.querySelector("[data-progress-bar]");
 const progressValue = document.querySelector("[data-progress-value]");
 const buildStage = document.querySelector("[data-build-stage]");
 const buildDemoFrame = document.querySelector("[data-build-demo-frame]");
+const buildDemoToggle = document.querySelector("[data-build-demo-toggle]");
+const workMotionToggle = document.querySelector("[data-work-motion-toggle]");
 
 const setMenuState = (open) => {
   if (!menuButton || !menuLabel || !mobileMenu) return;
@@ -71,23 +73,25 @@ const buildDemoCycleDuration = Object.values(buildDemoTiming).reduce((total, dur
 let buildFinished = false;
 let buildDemoStartAllowed = false;
 let buildDemoFrameReady = false;
+let buildDemoLoadStarted = false;
 let buildDemoVisible = true;
+let buildDemoPausedByUser = false;
 let buildDemoAnimationFrame = 0;
 let buildDemoCycleStartedAt = 0;
+let buildDemoMaxScroll = 0;
+let buildDemoLastProgress = -1;
 
 const setBuildDemoScroll = (scrollTop) => {
   if (!buildDemoFrame?.contentWindow) return;
 
   try {
-    const frameDocument = buildDemoFrame.contentWindow.document;
-    frameDocument.documentElement.scrollTop = scrollTop;
-    frameDocument.body.scrollTop = scrollTop;
+    buildDemoFrame.contentWindow.scrollTo(0, scrollTop);
   } catch {
     // The static screenshot stays visible if the same-origin preview is unavailable.
   }
 };
 
-const getBuildDemoMaxScroll = () => {
+const measureBuildDemo = () => {
   if (!buildDemoFrame?.contentWindow) return 0;
 
   try {
@@ -97,7 +101,8 @@ const getBuildDemoMaxScroll = () => {
       frameDocument.documentElement.scrollHeight,
       frameDocument.body.scrollHeight
     );
-    return Math.max(pageHeight - frameWindow.innerHeight, 0);
+    buildDemoMaxScroll = Math.max(pageHeight - frameWindow.innerHeight, 0);
+    return buildDemoMaxScroll;
   } catch {
     return 0;
   }
@@ -110,14 +115,14 @@ const stopBuildDemo = () => {
 };
 
 const renderBuildDemo = (timestamp) => {
-  if (!buildDemoFrameReady || !buildDemoVisible || document.hidden) {
+  if (!buildDemoFrameReady || !buildDemoVisible || buildDemoPausedByUser || document.hidden) {
     stopBuildDemo();
     return;
   }
 
   if (!buildDemoCycleStartedAt) buildDemoCycleStartedAt = timestamp;
 
-  const maxScroll = getBuildDemoMaxScroll();
+  const maxScroll = buildDemoMaxScroll || measureBuildDemo();
   const cycleTime = (timestamp - buildDemoCycleStartedAt) % buildDemoCycleDuration;
   const downStart = buildDemoTiming.topHold;
   const bottomStart = downStart + buildDemoTiming.scrollDown;
@@ -140,7 +145,11 @@ const renderBuildDemo = (timestamp) => {
   }
 
   setBuildDemoScroll(scrollTop);
-  buildWindow.dataset.demoProgress = String(maxScroll ? Math.round((scrollTop / maxScroll) * 100) : 0);
+  const currentProgress = maxScroll ? Math.round((scrollTop / maxScroll) * 100) : 0;
+  if (currentProgress !== buildDemoLastProgress) {
+    buildWindow.dataset.demoProgress = String(currentProgress);
+    buildDemoLastProgress = currentProgress;
+  }
   buildDemoAnimationFrame = window.requestAnimationFrame(renderBuildDemo);
 };
 
@@ -152,6 +161,7 @@ const startBuildDemo = () => {
     !buildDemoStartAllowed ||
     !buildDemoFrameReady ||
     !buildDemoVisible ||
+    buildDemoPausedByUser ||
     document.hidden ||
     buildDemoAnimationFrame
   ) return;
@@ -162,6 +172,83 @@ const startBuildDemo = () => {
   buildWindow.setAttribute("aria-label", "Scrolling preview of the Mr. Backsplash website");
   buildDemoAnimationFrame = window.requestAnimationFrame(renderBuildDemo);
 };
+
+const loadBuildDemo = () => {
+  if (
+    buildDemoLoadStarted ||
+    !buildDemoFrame ||
+    !buildFinished ||
+    !buildDemoVisible ||
+    document.hidden ||
+    reducedMotion ||
+    navigator.connection?.saveData
+  ) return;
+
+  buildDemoLoadStarted = true;
+  buildDemoFrame.addEventListener("load", () => {
+    buildDemoFrameReady = true;
+    buildWindow?.classList.add("is-demo-ready");
+    setBuildDemoScroll(0);
+    measureBuildDemo();
+
+    try {
+      const frameWindow = buildDemoFrame.contentWindow;
+      const frameDocument = frameWindow.document;
+      frameDocument.fonts?.ready.then(measureBuildDemo);
+      if (frameWindow.ResizeObserver) {
+        new frameWindow.ResizeObserver(measureBuildDemo).observe(frameDocument.documentElement);
+      }
+    } catch {
+      // The initial measurement is enough when embedded resize observation is unavailable.
+    }
+
+    if (buildDemoToggle) {
+      buildDemoToggle.hidden = false;
+      buildDemoToggle.disabled = false;
+    }
+    startBuildDemo();
+  }, { once: true });
+
+  fetch(buildDemoFrame.dataset.src, { credentials: "same-origin" })
+    .then((response) => {
+      if (!response.ok) throw new Error("Preview unavailable");
+      return response.text();
+    })
+    .then((markup) => {
+      const previewDocument = new DOMParser().parseFromString(markup, "text/html");
+      const previewBase = previewDocument.createElement("base");
+      const previewStyle = previewDocument.createElement("style");
+
+      previewBase.href = new URL(buildDemoFrame.dataset.src, document.baseURI).href;
+      previewStyle.textContent = "html{scroll-behavior:auto!important}body{pointer-events:none}";
+      previewDocument.head.prepend(previewBase);
+      previewDocument.head.append(previewStyle);
+      previewDocument.querySelectorAll("script").forEach((script) => script.remove());
+      previewDocument.querySelectorAll("video").forEach((video) => {
+        video.preload = "none";
+        video.removeAttribute("autoplay");
+      });
+
+      buildDemoFrame.srcdoc = `<!DOCTYPE html>${previewDocument.documentElement.outerHTML}`;
+    })
+    .catch(() => {
+      buildWindow?.setAttribute("data-demo-fallback", "true");
+      buildDemoToggle?.setAttribute("hidden", "");
+    });
+};
+
+buildDemoToggle?.addEventListener("click", () => {
+  buildDemoPausedByUser = !buildDemoPausedByUser;
+  buildDemoToggle.setAttribute("aria-pressed", String(buildDemoPausedByUser));
+  buildDemoToggle.setAttribute(
+    "aria-label",
+    buildDemoPausedByUser ? "Resume featured website preview" : "Pause featured website preview"
+  );
+  buildDemoToggle.textContent = buildDemoPausedByUser ? "Resume" : "Pause";
+
+  if (buildDemoPausedByUser) stopBuildDemo();
+  else startBuildDemo();
+});
 
 if (buildStage) {
   const updateBuildDemoScale = () => {
@@ -176,39 +263,21 @@ if (buildStage) {
 if (buildWindow && "IntersectionObserver" in window) {
   new IntersectionObserver(([entry]) => {
     buildDemoVisible = entry.isIntersecting;
-    if (buildDemoVisible) startBuildDemo();
+    if (buildDemoVisible) {
+      loadBuildDemo();
+      startBuildDemo();
+    }
     else stopBuildDemo();
   }, { threshold: 0.15 }).observe(buildWindow);
 }
 
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) stopBuildDemo();
-  else startBuildDemo();
-});
-
-if (buildDemoFrame && !reducedMotion && !navigator.connection?.saveData) {
-  buildDemoFrame.addEventListener("load", () => {
-    buildDemoFrameReady = true;
-    buildWindow?.classList.add("is-demo-ready");
-    setBuildDemoScroll(0);
+  else {
+    loadBuildDemo();
     startBuildDemo();
-  }, { once: true });
-
-  fetch(buildDemoFrame.dataset.src, { credentials: "same-origin" })
-    .then((response) => {
-      if (!response.ok) throw new Error("Preview unavailable");
-      return response.text();
-    })
-    .then((markup) => {
-      const staticPreview = markup
-        .replace(/<script\s+type="module"[^>]*><\/script>/i, "")
-        .replace("</head>", "<style>html{scroll-behavior:auto!important}body{pointer-events:none}</style></head>");
-      buildDemoFrame.srcdoc = staticPreview;
-    })
-    .catch(() => {
-      buildWindow?.setAttribute("data-demo-fallback", "true");
-    });
-}
+  }
+});
 
 if (buildWindow && buildStatus && progressBar && progressValue) {
   if (reducedMotion) {
@@ -231,6 +300,7 @@ if (buildWindow && buildStatus && progressBar && progressValue) {
 
       if (step.value === 100) {
         buildFinished = true;
+        loadBuildDemo();
         window.setTimeout(() => {
           buildDemoStartAllowed = true;
           startBuildDemo();
@@ -249,18 +319,27 @@ const initializeWorkWall = () => {
   const workWall = document.querySelector("[data-work-wall]");
   if (!workWall) return;
 
+  if (reducedMotion) {
+    workMotionToggle?.setAttribute("hidden", "");
+    return;
+  }
+
   workWall.querySelectorAll("[data-work-column]").forEach((column) => {
     const track = column.querySelector(".work-column-track");
     const sequence = column.querySelector("[data-work-sequence]");
     if (!track || !sequence || track.querySelector("[data-work-clone]")) return;
 
-    for (let copyIndex = 0; copyIndex < 2; copyIndex += 1) {
+    for (let copyIndex = 0; copyIndex < 1; copyIndex += 1) {
       const clone = sequence.cloneNode(true);
       clone.setAttribute("aria-hidden", "true");
+      clone.setAttribute("inert", "");
       clone.setAttribute("data-work-clone", "");
       clone.removeAttribute("data-work-sequence");
       clone.querySelectorAll("a").forEach((link) => {
         link.tabIndex = -1;
+        link.removeAttribute("href");
+        link.removeAttribute("target");
+        link.removeAttribute("rel");
         link.removeAttribute("data-project-card");
       });
       track.appendChild(clone);
@@ -268,9 +347,19 @@ const initializeWorkWall = () => {
   });
 
   workWall.classList.add("is-looping");
+  if (workMotionToggle) workMotionToggle.hidden = false;
 };
 
 initializeWorkWall();
+
+workMotionToggle?.addEventListener("click", () => {
+  const workWall = document.querySelector("[data-work-wall]");
+  if (!workWall) return;
+
+  const paused = workWall.classList.toggle("is-paused");
+  workMotionToggle.setAttribute("aria-pressed", String(paused));
+  workMotionToggle.textContent = paused ? "Resume portfolio" : "Pause portfolio";
+});
 
 document.addEventListener("click", (event) => {
   const link = event.target.closest("a");

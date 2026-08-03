@@ -491,6 +491,11 @@
   opacity: 0.01;
 }
 
+.start-comparison:focus-within {
+  outline: 3px solid #7c3aed;
+  outline-offset: 4px;
+}
+
 .start-comparison::after {
   position: absolute;
   z-index: 4;
