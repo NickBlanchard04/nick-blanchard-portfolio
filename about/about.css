@@ -115,10 +115,6 @@
   transform: scale(1.025);
 }
 
-.about-project-frame > img.is-switching {
-  opacity: 0.35;
-}
-
 .about-project-caption {
   position: relative;
   display: flex;

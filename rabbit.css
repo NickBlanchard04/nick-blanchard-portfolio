@@ -226,8 +226,12 @@ img[src$="bbb-metallic-b.png"] {
 
 @media (min-width: 48rem) {
   .hero {
-    height: 44.55rem;
-    min-height: 0;
+    height: auto;
+    min-height: 48.5rem;
+  }
+
+  .hero-inner {
+    min-height: 48.5rem;
   }
 
   .hero-copy,
@@ -339,11 +343,16 @@ img[src$="bbb-metallic-b.png"] {
   gap: 0.55rem;
 }
 
-.hero-benefits img {
-  width: 1.15rem;
-  height: 1.15rem;
-  border-radius: 50%;
-  box-shadow: 0 0 1.25rem rgba(139, 92, 246, 0.3);
+.benefit-check {
+  display: inline-grid;
+  width: 1.2rem;
+  height: 1.2rem;
+  flex: 0 0 1.2rem;
+  place-items: center;
+  font-size: 1rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 0.42rem rgba(34, 197, 94, 0.95));
+  text-shadow: 0 0 0.8rem rgba(74, 222, 128, 0.8);
 }
 
 .build-window {
@@ -493,59 +502,6 @@ img[src$="bbb-metallic-b.png"] {
   color: #8b92a2;
   font-size: 0.65rem;
   font-weight: 700;
-}
-
-.proof-strip {
-  display: grid;
-  min-height: 12rem;
-  align-content: center;
-  overflow: hidden;
-  border-bottom: 1px solid var(--line);
-}
-
-.proof-strip > p {
-  margin: 0 0 1.8rem;
-  color: #565d6e;
-  font-size: 0.59rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.proof-marquee {
-  overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-}
-
-.proof-track {
-  display: flex;
-  width: max-content;
-  align-items: center;
-  gap: 5.5rem;
-  color: #5d6474;
-  animation: marquee 36s linear infinite;
-}
-
-.proof-track span {
-  min-width: max-content;
-  font-size: 0.91rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-}
-
-.proof-track small {
-  margin-left: 0.35rem;
-  color: #777e8e;
-  font-size: 0.56rem;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
-  }
 }
 
 .process,
@@ -1290,15 +1246,6 @@ img[src$="bbb-metallic-b.png"] {
   .build-status {
     margin-bottom: 1rem;
     font-size: 0.82rem;
-  }
-
-  .proof-strip {
-    min-height: 11rem;
-  }
-
-  .proof-track {
-    gap: 4rem;
-    animation-duration: 28s;
   }
 
   .process {
